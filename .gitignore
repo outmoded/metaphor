@@ -1,0 +1,13 @@
+npm-debug.log
+dump.rdb
+node_modules
+npm-shrinkwrap.json
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+._*
+*/._*
+*/*/._*
+coverage.*
+config.json
+vault.json

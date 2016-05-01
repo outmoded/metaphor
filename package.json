@@ -1,0 +1,24 @@
+{
+    "name": "@sideway/oembed",
+    "description": "OEmbed client",
+    "version": "1.0.0",
+    "repository": "git://github.com/sideway/oembed",
+    "main": "lib/index.js",
+    "engines": {
+        "node": "5.x.x"
+    },
+    "dependencies": {
+        "boom": "3.x.x",
+        "hoek": "3.x.x",
+        "wreck": "7.x.x"
+    },
+    "devDependencies": {
+        "code": "2.x.x",
+        "lab": "10.x.x"
+    },
+    "scripts": {
+        "test": "node node_modules/lab/bin/lab -a code -t 100 -L",
+        "test-cov-html": "node node_modules/lab/bin/lab -a code -r html -o coverage.html"
+    },
+    "license": "UNLICENSED"
+}
