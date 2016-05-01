@@ -1,2 +1,2 @@
-# oembed
-OEmbed Client
+# meta
+Open Graph Metadata Collector
