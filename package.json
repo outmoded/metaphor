@@ -8,7 +8,6 @@
         "node": ">=5.x.x"
     },
     "dependencies": {
-        "hoek": "4.x.x",
         "wreck": "7.x.x"
     },
     "devDependencies": {

@@ -4,7 +4,7 @@
 
 const Code = require('code');
 const Lab = require('lab');
-const Oembed = require('..');
+const Metaphor = require('..');
 
 
 // Declare internals
@@ -20,13 +20,13 @@ const it = lab.it;
 const expect = Code.expect;
 
 
-describe('Oembed', () => {
+describe('Metaphor', () => {
 
     describe('describe()', () => {
 
         it('describes a known resource', (done) => {
 
-            Oembed.describe('https://twitter.com/sideway/status/626158822705401856', (err, description) => {
+            Metaphor.describe('https://twitter.com/sideway/status/626158822705401856', (err, description) => {
 
                 expect(err).to.not.exist();
                 console.log(description);
@@ -34,12 +34,21 @@ describe('Oembed', () => {
             });
         });
 
-        it('returns null on unknown resource', (done) => {
+        it('errors on missing document', (done) => {
 
-            Oembed.describe('https://example.com/2705401856', (err, description) => {
+            Metaphor.describe('https://twitter.com/sideway/status/1', (err, description) => {
 
-                expect(err).to.not.exist();
-                expect(description).to.not.exist();
+                expect(err).to.exist();
+                expect(err.message).to.equal('Failed obtaining document');
+                done();
+            });
+        });
+
+        it('errors on invalid domain', (done) => {
+
+            Metaphor.describe('https://no_such_domain/1', (err, description) => {
+
+                expect(err).to.exist();
                 done();
             });
         });
