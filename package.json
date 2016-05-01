@@ -1,11 +1,11 @@
 {
-    "name": "@sideway/oembed",
-    "description": "OEmbed client",
+    "name": "metaphor",
+    "description": "Open Graph Metadata Collector",
     "version": "1.0.0",
-    "repository": "git://github.com/sideway/oembed",
+    "repository": "git://github.com/hueniverse/metaphor",
     "main": "lib/index.js",
     "engines": {
-        "node": "5.x.x"
+        "node": ">=5.x.x"
     },
     "dependencies": {
         "hoek": "4.x.x",
@@ -19,5 +19,5 @@
         "test": "node node_modules/lab/bin/lab -a code -t 100 -L",
         "test-cov-html": "node node_modules/lab/bin/lab -a code -r html -o coverage.html"
     },
-    "license": "UNLICENSED"
+    "license": "BSD-3-Clause"
 }
