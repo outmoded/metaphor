@@ -42,12 +42,40 @@ describe('Metaphor', () => {
             });
         });
 
+        it('errors a resource with missing url', { parallel: false }, (done) => {
+
+            const orig = Metaphor.process;
+            Metaphor.process = (tags) => {
+
+                Metaphor.process = orig;
+                const description = Metaphor.process(tags);
+                delete description.url;
+                return description;
+            };
+
+            Metaphor.describe('https://twitter.com/sideway/status/626158822705401856', (err, description) => {
+
+                expect(err).to.exist();
+                expect(description).to.deep.equal({
+                    type: 'article',
+                    url: 'https://twitter.com/sideway/status/626158822705401856',
+                    title: 'Sideway on Twitter',
+                    image: { url: 'https://pbs.twimg.com/profile_images/690377853456760833/PINrFseJ_400x400.png' },
+                    description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                    site_name: 'Twitter'
+                });
+
+                done();
+            });
+        });
+
         it('errors on missing document', (done) => {
 
             Metaphor.describe('https://twitter.com/sideway/status/1', (err, description) => {
 
                 expect(err).to.exist();
                 expect(err.message).to.equal('Failed obtaining document');
+                expect(description).to.deep.equal({ type: 'website', url: 'https://twitter.com/sideway/status/1' });
                 done();
             });
         });
@@ -57,6 +85,7 @@ describe('Metaphor', () => {
             Metaphor.describe('https://no_such_domain/1', (err, description) => {
 
                 expect(err).to.exist();
+                expect(description).to.deep.equal({ type: 'website', url: 'https://no_such_domain/1' });
                 done();
             });
         });
