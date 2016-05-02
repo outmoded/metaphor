@@ -80,10 +80,9 @@ describe('Metaphor', () => {
             </body>
             </html>`;
 
-            Metaphor.parse(html, (err, tags) => {
+            Metaphor.parse(html, (err, description) => {
 
                 expect(err).to.not.exist();
-                const description = Metaphor.process(tags);
                 expect(description).to.deep.equal({
                     title: 'The Rock',
                     type: 'video.movie',
@@ -115,10 +114,9 @@ describe('Metaphor', () => {
             </body>
             </html>`;
 
-            Metaphor.parse(html, (err, tags) => {
+            Metaphor.parse(html, (err, description) => {
 
                 expect(err).to.not.exist();
-                const description = Metaphor.process(tags);
                 expect(description).to.deep.equal({
                     title: 'The Rock',
                     type: 'video.movie',
@@ -156,10 +154,9 @@ describe('Metaphor', () => {
             </body>
             </html>`;
 
-            Metaphor.parse(html, (err, tags) => {
+            Metaphor.parse(html, (err, description) => {
 
                 expect(err).to.not.exist();
-                const description = Metaphor.process(tags);
                 expect(description).to.deep.equal({
                     title: 'The Rock',
                     type: 'video.movie',
@@ -183,16 +180,19 @@ describe('Metaphor', () => {
             const html = `<html>
             <head>
                 <meta property="og:title" content="The Rock" />
+                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
+                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
             </head>
             </html>`;
 
-            Metaphor.parse(html, (err, tags) => {
+            Metaphor.parse(html, (err, description) => {
 
                 expect(err).to.not.exist();
-                const description = Metaphor.process(tags);
                 expect(description).to.deep.equal({
                     title: 'The Rock',
-                    type: 'website'
+                    type: 'website',
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' }
                 });
 
                 done();
@@ -218,10 +218,9 @@ describe('Metaphor', () => {
             </body>
             </html>`;
 
-            Metaphor.parse(html, (err, tags) => {
+            Metaphor.parse(html, (err, description) => {
 
                 expect(err).to.not.exist();
-                const description = Metaphor.process(tags);
                 expect(description).to.deep.equal({
                     title: 'The Rock',
                     type: 'video.movie',
@@ -236,19 +235,70 @@ describe('Metaphor', () => {
             });
         });
 
-        it('return empty object on missing head', (done) => {
+        it('errors on missing image', (done) => {
 
-            const html = `<html prefix="og: http://ogp.me/ns#">
-            <body>
-                <meta property="og:image" content="ignore2" />
-            </body>
+            const html = `<html>
+            <head>
+                <meta property="og:title" content="The Rock" />
+                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
+            </head>
             </html>`;
 
-            Metaphor.parse(html, (err, tags) => {
+            Metaphor.parse(html, (err, description) => {
 
-                expect(err).to.not.exist();
-                const description = Metaphor.process(tags);
-                expect(description).to.deep.equal({ type: 'website' });
+                expect(err).to.exist();
+                expect(err.message).to.equal('Description missing required property');
+                expect(description).to.deep.equal({
+                    title: 'The Rock',
+                    type: 'website',
+                    url: 'http://www.imdb.com/title/tt0117500/'
+                });
+
+                done();
+            });
+        });
+
+        it('errors on missing url', (done) => {
+
+            const html = `<html>
+            <head>
+                <meta property="og:title" content="The Rock" />
+                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
+            </head>
+            </html>`;
+
+            Metaphor.parse(html, (err, description) => {
+
+                expect(err).to.exist();
+                expect(err.message).to.equal('Description missing required property');
+                expect(description).to.deep.equal({
+                    title: 'The Rock',
+                    type: 'website',
+                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' }
+                });
+
+                done();
+            });
+        });
+
+        it('errors on missing title', (done) => {
+
+            const html = `<html>
+            <head>
+                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
+                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
+            </head>
+            </html>`;
+
+            Metaphor.parse(html, (err, description) => {
+
+                expect(err).to.exist();
+                expect(err.message).to.equal('Description missing required property');
+                expect(description).to.deep.equal({
+                    type: 'website',
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' }
+                });
 
                 done();
             });
