@@ -1,44 +1,54 @@
 'use strict';
 
 const Bench = require('bench');
-const HtmlParser2 = require('htmlparser2');
 const Metaphor = require('.');
 const Wreck = require('wreck');
 
 
-const parse = function (document, next) {
+const parse = function (document) {
+
+    // Grab the head
+
+    const head = document.match(/<head[^>]*>([\s\S]*)<\/head\s*>/);
+    if (!head) {
+        return [];
+    }
+
+    // Remove scripts
+
+    const scripts = head[1].split('</script>');         //     '<script>a</script>something<script>a</script>' -> ['<script>a', 'something<script>a', '']
+    const chunks = [];
+    scripts.forEach((chunk) => {
+
+        const pos = chunk.indexOf('<script');
+        if (pos !== -1) {
+            chunk = chunk.slice(0, pos);
+        }
+
+        chunks.push(chunk);
+    });
+
+    // Find meta tags
+
+    const elements = [];
+    chunks.forEach((chunk) => {
+
+        const parts = chunk.split('<meta ');
+        for (let i = 1; i < parts.length; ++i) {
+            elements.push(parts[i].slice(0, parts[i].indexOf('>')));
+        }
+    });
 
     const tags = [];
-    const parser = new HtmlParser2.Parser({
-        onopentag: function (name, attributes) {
-
-            if (name === 'meta' &&
-                attributes.property) {
-
-                const parsed = attributes.property.match(/^og:([^:]*)(?:\:(.*))?$/);
-                if (parsed) {
-                    tags.push({ key: parsed[1], sub: parsed[2], value: attributes.content });
-                }
-            }
-        },
-        onclosetag: function (name) {
-
-            if (name === 'head') {
-                parser.reset();
-            }
-        },
-        onend: function () {
-
-            return next(null, tags);
-        },
-        onerror: function (err) {
-
-            return next(err);
+    for (let i = 0; i < elements.length; ++i) {
+        const element = elements[i];
+        const parsed = element.match(/\s*property\s*=\s*"og:([^":]*)(?:\:([^"]*))?"\s+content\s*=\s*"([^"]*)\s*"/);
+        if (parsed) {
+            tags.push({ key: parsed[1], sub: parsed[2], value: parsed[3] });
         }
-    }, { decodeEntities: true });
+    }
 
-    parser.write(document);
-    parser.end();
+    return tags;
 };
 
 
@@ -47,12 +57,12 @@ let document;
 exports.compare = {
     metaphor: function (done) {
 
-        Metaphor.parse(document);
-        return done();
+        Metaphor.parse(document, done);
     },
-    htmlparser2: function (done) {
+    custom: function (done) {
 
-        parse(document, done);
+        parse(document);
+        return done();
     }
 };
 
