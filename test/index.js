@@ -42,6 +42,24 @@ describe('Metaphor', () => {
             });
         });
 
+        it('describes a resource with redirection', (done) => {
+
+            Metaphor.describe('https://twitter.com/x/status/626158822705401856', (err, description) => {
+
+                expect(err).to.not.exist();
+                expect(description).to.deep.equal({
+                    type: 'article',
+                    url: 'https://twitter.com/sideway/status/626158822705401856',
+                    title: 'Sideway on Twitter',
+                    image: { url: 'https://pbs.twimg.com/profile_images/690377853456760833/PINrFseJ_400x400.png' },
+                    description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                    site_name: 'Twitter'
+                });
+
+                done();
+            });
+        });
+
         it('errors a resource with missing url', { parallel: false }, (done) => {
 
             const orig = Metaphor.process;
