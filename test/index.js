@@ -84,6 +84,24 @@ describe('Metaphor', () => {
             });
         });
 
+        it('describes an image', (done) => {
+
+            Metaphor.describe('https://www.sideway.com/sideway.png', {}, (err, description) => {
+
+                expect(err).to.not.exist();
+                expect(description).to.equal({
+                    url: 'https://www.sideway.com/sideway.png',
+                    type: 'website',
+                    embed: {
+                        url: 'https://www.sideway.com/sideway.png',
+                        type: 'photo'
+                    }
+                });
+
+                done();
+            });
+        });
+
         it('describes a resource with redirection', (done) => {
 
             Metaphor.describe('https://twitter.com/x/status/626158822705401856', {}, (err, description) => {
@@ -125,6 +143,85 @@ describe('Metaphor', () => {
 
                 expect(err).to.exist();
                 expect(description).to.equal({ type: 'website', url: 'https://no_such_domain/1' });
+                done();
+            });
+        });
+
+        it('handles unknown content type', { parallel: false }, (done) => {
+
+            const orig = Wreck.request;
+            Wreck.request = (method, url, options, next) => {
+
+                Wreck.request = orig;
+                setImmediate(() => next(null, { statusCode: 200, headers: { 'content-type': 'x/y' } }));
+                return { abort: () => { } };
+            };
+
+            Metaphor.describe('https://example.com/invalid', {}, (err, description) => {
+
+                expect(err).to.not.exist();
+                expect(description).to.equal({ type: 'website', url: 'https://example.com/invalid' });
+                done();
+            });
+        });
+
+        it('errors on missing content-type', { parallel: false }, (done) => {
+
+            const orig = Wreck.request;
+            Wreck.request = (method, url, options, next) => {
+
+                Wreck.request = orig;
+                setImmediate(() => next(null, { statusCode: 200, headers: {} }));
+                return { abort: () => { } };
+            };
+
+            Metaphor.describe('https://example.com/invalid', {}, (err, description) => {
+
+                expect(err).to.be.an.error('Failed obtaining document');
+                expect(description).to.equal({ type: 'website', url: 'https://example.com/invalid' });
+                done();
+            });
+        });
+
+        it('errors on invalid content-type', { parallel: false }, (done) => {
+
+            const orig = Wreck.request;
+            Wreck.request = (method, url, options, next) => {
+
+                Wreck.request = orig;
+                setImmediate(() => next(null, { statusCode: 200, headers: { 'content-type': 'x' } }));
+                return { abort: () => { } };
+            };
+
+            Metaphor.describe('https://example.com/invalid', {}, (err, description) => {
+
+                expect(err).to.be.an.error('Failed obtaining document');
+                expect(description).to.equal({ type: 'website', url: 'https://example.com/invalid' });
+                done();
+            });
+        });
+
+        it('errors on invalid response object', { parallel: false }, (done) => {
+
+            const origRequest = Wreck.request;
+            Wreck.request = (method, url, options, next) => {
+
+                Wreck.request = origRequest;
+                setImmediate(() => next(null, { statusCode: 200, headers: { 'content-type': 'text/html' } }));
+                return { abort: () => { } };
+            };
+
+            const origRead = Wreck.read;
+            Wreck.read = (res, options, next) => {
+
+                Wreck.read = origRead;
+                return next(new Error('Invalid'));
+            };
+
+            Metaphor.describe('https://example.com/invalid', {}, (err, description) => {
+
+                expect(err).to.be.an.error('Failed obtaining document');
+                expect(description).to.equal({ type: 'website', url: 'https://example.com/invalid' });
                 done();
             });
         });

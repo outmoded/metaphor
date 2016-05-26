@@ -8,6 +8,7 @@
         "node": ">=4.x.x"
     },
     "dependencies": {
+        "content": "3.x.x",
         "htmlparser2": "3.x.x",
         "joi": "8.x.x",
         "wreck": "7.x.x"
