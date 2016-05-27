@@ -77,7 +77,15 @@ describe('Metaphor', () => {
                         width: 320,
                         url: 'https://farm1.staticflickr.com/259/19455364653_201bdfd31b_n.jpg',
                         html: '<a data-flickr-embed="true" href="https://www.flickr.com/photos/kent-macdonald/19455364653/" title="300/365 &quot;The Lonely Gold Rush&quot; by achillesheels, on Flickr"><img src="https://farm1.staticflickr.com/259/19455364653_201bdfd31b_n.jpg" width="320" height="180" alt="300/365 &quot;The Lonely Gold Rush&quot;"></a><script async src="https://embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>'
-                    }
+                    },
+                    app: {
+                        iphone: {
+                            name: 'Flickr',
+                            id: '328407587',
+                            url: 'flickr://flickr.com/photos/kent-macdonald/19455364653/'
+                        }
+                    },
+                    twitter: { site_username: '@flickr' }
                 });
 
                 done();
@@ -130,7 +138,80 @@ describe('Metaphor', () => {
                         height: 338,
                         width: 600,
                         html: '<blockquote class="wp-embedded-content"><a href="http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/">Google Doesn&#8217;t Owe Oracle a Cent for Using Java in Android, Jury Finds</a></blockquote>\n<script type=\'text/javascript\'>\n<!--//--><![CDATA[//><!--\n\t\t!function(a,b){"use strict";function c(){if(!e){e=!0;var a,c,d,f,g=-1!==navigator.appVersion.indexOf("MSIE 10"),h=!!navigator.userAgent.match(/Trident.*rv:11\\./),i=b.querySelectorAll("iframe.wp-embedded-content");for(c=0;c<i.length;c++)if(d=i[c],!d.getAttribute("data-secret")){if(f=Math.random().toString(36).substr(2,10),d.src+="#?secret="+f,d.setAttribute("data-secret",f),g||h)a=d.cloneNode(!0),a.removeAttribute("security"),d.parentNode.replaceChild(a,d)}else;}}var d=!1,e=!1;if(b.querySelector)if(a.addEventListener)d=!0;if(a.wp=a.wp||{},!a.wp.receiveEmbedMessage)if(a.wp.receiveEmbedMessage=function(c){var d=c.data;if(d.secret||d.message||d.value)if(!/[^a-zA-Z0-9]/.test(d.secret)){var e,f,g,h,i,j=b.querySelectorAll(\'iframe[data-secret="\'+d.secret+\'"]\'),k=b.querySelectorAll(\'blockquote[data-secret="\'+d.secret+\'"]\');for(e=0;e<k.length;e++)k[e].style.display="none";for(e=0;e<j.length;e++)if(f=j[e],c.source===f.contentWindow){if(f.removeAttribute("style"),"height"===d.message){if(g=parseInt(d.value,10),g>1e3)g=1e3;else if(200>~~g)g=200;f.height=g}if("link"===d.message)if(h=b.createElement("a"),i=b.createElement("a"),h.href=f.getAttribute("src"),i.href=d.value,i.host===h.host)if(b.activeElement===f)a.top.location.href=d.value}else;}},d)a.addEventListener("message",a.wp.receiveEmbedMessage,!1),b.addEventListener("DOMContentLoaded",c,!1),a.addEventListener("load",c,!1)}(window,document);\n//--><!]]>\n</script><iframe sandbox="allow-scripts" security="restricted" src="http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/embed/" width="600" height="338" title="&#8220;Google Doesn&#8217;t Owe Oracle a Cent for Using Java in Android, Jury Finds&#8221; &#8212; WIRED" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="wp-embedded-content"></iframe>'
+                    },
+                    twitter: {
+                        site_username: '@wired',
+                        creator_username: '@wired'
                     }
+                });
+
+                done();
+            });
+        });
+
+        it('described a YouTube video', (done) => {
+
+            Metaphor.describe('https://www.youtube.com/watch?v=nTnPCF9OWHM', {}, (err, description) => {
+
+                expect(err).to.not.exist();
+                expect(description).to.equal({
+                    site_name: 'YouTube',
+                    url: 'https://www.youtube.com/watch?v=nTnPCF9OWHM',
+                    title: 'Episode #13 - FULL SHOW | Full Frontal with Samantha Bee | TBS',
+                    image: { url: 'https://i.ytimg.com/vi/nTnPCF9OWHM/maxresdefault.jpg' },
+                    description: 'Full episode from May 23, 2016. Watch Full Frontal with Samantha Bee Mondays at 10:30/ 9:30c on TBS!',
+                    type: 'video',
+                    video: [
+                        {
+                            url: 'https://www.youtube.com/embed/nTnPCF9OWHM',
+                            secure_url: 'https://www.youtube.com/embed/nTnPCF9OWHM',
+                            type: 'text/html',
+                            width: '1280',
+                            height: '720'
+                        },
+                        {
+                            url: 'http://www.youtube.com/v/nTnPCF9OWHM?version=3&autohide=1',
+                            secure_url: 'https://www.youtube.com/v/nTnPCF9OWHM?version=3&autohide=1',
+                            type: 'application/x-shockwave-flash',
+                            width: '1280',
+                            height: '720',
+                            tag: ['Full Frontal with Samantha Bee', 'Full Frontal', 'Samantha Bee', 'TBS']
+                        }
+                    ],
+                    thumbnail: {
+                        url: 'https://i.ytimg.com/vi/nTnPCF9OWHM/hqdefault.jpg',
+                        width: 480,
+                        height: 360
+                    },
+                    embed: {
+                        type: 'video',
+                        height: 270,
+                        width: 480,
+                        html: '<iframe width="480" height="270" src="https://www.youtube.com/embed/nTnPCF9OWHM?feature=oembed" frameborder="0" allowfullscreen></iframe>'
+                    },
+                    app: {
+                        iphone: {
+                            name: 'YouTube',
+                            id: '544007664',
+                            url: 'vnd.youtube://www.youtube.com/watch?v=nTnPCF9OWHM&feature=applinks'
+                        },
+                        ipad: {
+                            name: 'YouTube',
+                            id: '544007664',
+                            url: 'vnd.youtube://www.youtube.com/watch?v=nTnPCF9OWHM&feature=applinks'
+                        },
+                        googleplay: {
+                            name: 'YouTube',
+                            id: 'com.google.android.youtube',
+                            url: 'https://www.youtube.com/watch?v=nTnPCF9OWHM'
+                        }
+                    },
+                    player: {
+                        url: 'https://www.youtube.com/embed/nTnPCF9OWHM',
+                        width: '1280',
+                        height: '720'
+                    },
+                    twitter: { site_username: '@youtube' }
                 });
 
                 done();
