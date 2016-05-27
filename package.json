@@ -1,6 +1,6 @@
 {
     "name": "metaphor",
-    "description": "Open Graph Metadata Collector",
+    "description": "Open Graph, Twitter Card, and OEmbed Metadata Collector",
     "version": "2.1.0",
     "repository": "git://github.com/hueniverse/metaphor",
     "main": "lib/index.js",
