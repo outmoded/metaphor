@@ -94,7 +94,42 @@ describe('Metaphor', () => {
                     type: 'website',
                     embed: {
                         url: 'https://www.sideway.com/sideway.png',
-                        type: 'photo'
+                        type: 'photo',
+                        size: 17014
+                    }
+                });
+
+                done();
+            });
+        });
+
+        it('describes an article', (done) => {
+
+            Metaphor.describe('http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/', {}, (err, description) => {
+
+                expect(err).to.not.exist();
+                expect(description).to.equal({
+                    type: 'article',
+                    title: 'Google Doesn\u2019t Owe Oracle a Cent for Using Java in Android, Jury Finds',
+                    image: {
+                        url: 'http://www.wired.com/wp-content/uploads/2016/05/android-1200x630-e1464301027666.jpg',
+                        width: '1200',
+                        height: '630'
+                    },
+                    description: 'The verdict could have major implications for the future of software developments.',
+                    locale: { primary: 'en_US' },
+                    url: 'http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/',
+                    site_name: 'WIRED',
+                    thumbnail: {
+                        url: 'http://www.wired.com/wp-content/uploads/2016/05/android.jpg',
+                        width: 600,
+                        height: 450
+                    },
+                    embed: {
+                        type: 'rich',
+                        height: 338,
+                        width: 600,
+                        html: '<blockquote class="wp-embedded-content"><a href="http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/">Google Doesn&#8217;t Owe Oracle a Cent for Using Java in Android, Jury Finds</a></blockquote>\n<script type=\'text/javascript\'>\n<!--//--><![CDATA[//><!--\n\t\t!function(a,b){"use strict";function c(){if(!e){e=!0;var a,c,d,f,g=-1!==navigator.appVersion.indexOf("MSIE 10"),h=!!navigator.userAgent.match(/Trident.*rv:11\\./),i=b.querySelectorAll("iframe.wp-embedded-content");for(c=0;c<i.length;c++)if(d=i[c],!d.getAttribute("data-secret")){if(f=Math.random().toString(36).substr(2,10),d.src+="#?secret="+f,d.setAttribute("data-secret",f),g||h)a=d.cloneNode(!0),a.removeAttribute("security"),d.parentNode.replaceChild(a,d)}else;}}var d=!1,e=!1;if(b.querySelector)if(a.addEventListener)d=!0;if(a.wp=a.wp||{},!a.wp.receiveEmbedMessage)if(a.wp.receiveEmbedMessage=function(c){var d=c.data;if(d.secret||d.message||d.value)if(!/[^a-zA-Z0-9]/.test(d.secret)){var e,f,g,h,i,j=b.querySelectorAll(\'iframe[data-secret="\'+d.secret+\'"]\'),k=b.querySelectorAll(\'blockquote[data-secret="\'+d.secret+\'"]\');for(e=0;e<k.length;e++)k[e].style.display="none";for(e=0;e<j.length;e++)if(f=j[e],c.source===f.contentWindow){if(f.removeAttribute("style"),"height"===d.message){if(g=parseInt(d.value,10),g>1e3)g=1e3;else if(200>~~g)g=200;f.height=g}if("link"===d.message)if(h=b.createElement("a"),i=b.createElement("a"),h.href=f.getAttribute("src"),i.href=d.value,i.host===h.host)if(b.activeElement===f)a.top.location.href=d.value}else;}},d)a.addEventListener("message",a.wp.receiveEmbedMessage,!1),b.addEventListener("DOMContentLoaded",c,!1),a.addEventListener("load",c,!1)}(window,document);\n//--><!]]>\n</script><iframe sandbox="allow-scripts" security="restricted" src="http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/embed/" width="600" height="338" title="&#8220;Google Doesn&#8217;t Owe Oracle a Cent for Using Java in Android, Jury Finds&#8221; &#8212; WIRED" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="wp-embedded-content"></iframe>'
                     }
                 });
 
@@ -165,6 +200,35 @@ describe('Metaphor', () => {
             });
         });
 
+        it('handles missing content-length', { parallel: false }, (done) => {
+
+            const orig = Wreck.request;
+            Wreck.request = (method, url, options, next) => {
+
+                Wreck.request = orig;
+                return Wreck.request(method, url, options, (err, res) => {
+
+                    delete res.headers['content-length'];
+                    return next(err, res);
+                });
+            };
+
+            Metaphor.describe('https://www.sideway.com/sideway.png', {}, (err, description) => {
+
+                expect(err).to.not.exist();
+                expect(description).to.equal({
+                    url: 'https://www.sideway.com/sideway.png',
+                    type: 'website',
+                    embed: {
+                        url: 'https://www.sideway.com/sideway.png',
+                        type: 'photo'
+                    }
+                });
+
+                done();
+            });
+        });
+
         it('errors on missing content-type', { parallel: false }, (done) => {
 
             const orig = Wreck.request;
@@ -229,35 +293,6 @@ describe('Metaphor', () => {
 
     describe('parse()', () => {
 
-        it('ignores tags in scripts and body', (done) => {
-
-            const html = `<html prefix="og: http://ogp.me/ns#">
-            <head>
-                <title>The Rock (1996)</title>
-                <meta property="og:title" content="The Rock" />
-                <meta property="og:type" content="video.movie" />
-                <script><meta property="og:image" content="ignore2" /></script>
-                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
-            </head>
-            <body>
-                <meta property="og:image" content="ignore2" />
-            </body>
-            </html>`;
-
-            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
-
-                expect(description).to.equal({
-                    title: 'The Rock',
-                    type: 'video.movie',
-                    url: 'http://www.imdb.com/title/tt0117500/',
-                    image: { url: 'http://ia.media-imdb.com/images/rock.jpg' }
-                });
-
-                done();
-            });
-        });
-
         it('uses oembed site_name if og is missing', (done) => {
 
             const html = `<html>
@@ -312,321 +347,6 @@ describe('Metaphor', () => {
                     url: 'https://twitter.com/dalmaer/status/726624422237364226',
                     type: 'website',
                     site_name: 'Twitter'
-                });
-
-                done();
-            });
-        });
-    });
-
-    describe('process()', () => {
-
-        it('supports multiple images', (done) => {
-
-            const html = `<html prefix="og: http://ogp.me/ns#">
-            <head>
-                <title>The Rock (1996)</title>
-                <meta property="og:title" content="The Rock" />
-                <meta property="og:type" content="video.movie" />
-                <script><meta property="og:image" content="ignore2" /></script>
-                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock2.jpg" />
-            </head>
-            <body>
-                <meta property="og:image" content="ignore2" />
-            </body>
-            </html>`;
-
-            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
-
-                expect(description).to.equal({
-                    title: 'The Rock',
-                    type: 'video.movie',
-                    url: 'http://www.imdb.com/title/tt0117500/',
-                    image: [
-                        { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
-                        { url: 'http://ia.media-imdb.com/images/rock2.jpg' }
-                    ]
-                });
-
-                done();
-            });
-        });
-
-        it('supports multiple images with sub attributes', (done) => {
-
-            const html = `<html prefix="og: http://ogp.me/ns#">
-            <head>
-                <title>The Rock (1996)</title>
-                <meta property="og:title" content="The Rock" />
-                <meta property="og:type" content="video.movie" />
-                <script><meta property="og:image" content="ignore2" /></script>
-                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
-                <meta property="og:image:height" content="330" />
-                <meta property="og:image:width" content="500" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock2.jpg" />
-                <meta property="og:image:secure_url" content="https://ia.media-imdb.com/images/rock2.jpg" />
-                <meta property="og:locale" content="en_GB" />
-                <meta property="og:locale:alternate" content="fr_FR" />
-                <meta property="og:locale:alternate" content="es_ES" />
-            </head>
-            <body>
-                <meta property="og:image" content="ignore2" />
-            </body>
-            </html>`;
-
-            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
-
-                expect(description).to.equal({
-                    title: 'The Rock',
-                    type: 'video.movie',
-                    url: 'http://www.imdb.com/title/tt0117500/',
-                    image: [
-                        { url: 'http://ia.media-imdb.com/images/rock1.jpg', width: '500', height: '330' },
-                        { url: 'http://ia.media-imdb.com/images/rock2.jpg', secure_url: 'https://ia.media-imdb.com/images/rock2.jpg' }
-                    ],
-                    locale: {
-                        primary: 'en_GB',
-                        alternate: ['fr_FR', 'es_ES']
-                    }
-                });
-
-                done();
-            });
-        });
-
-        it('sets default type', (done) => {
-
-            const html = `<html>
-            <head>
-                <meta property="og:title" content="The Rock" />
-                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
-            </head>
-            </html>`;
-
-            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
-
-                expect(description).to.equal({
-                    title: 'The Rock',
-                    type: 'website',
-                    url: 'http://www.imdb.com/title/tt0117500/',
-                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' }
-                });
-
-                done();
-            });
-        });
-
-        it('ignore sub properties in the wrong place', (done) => {
-
-            const html = `<html prefix="og: http://ogp.me/ns#">
-            <head>
-                <title>The Rock (1996)</title>
-                <meta property="og:title" content="The Rock" />
-                <meta property="og:type" content="video.movie" />
-                <script><meta property="og:image" content="ignore2" /></script>
-                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
-                <meta property="og:video:height" content="330" />
-                <meta property="og:image:width" content="500" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock2.jpg" />
-            </head>
-            <body>
-                <meta property="og:image" content="ignore2" />
-            </body>
-            </html>`;
-
-            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
-
-                expect(description).to.equal({
-                    title: 'The Rock',
-                    type: 'video.movie',
-                    url: 'http://www.imdb.com/title/tt0117500/',
-                    image: [
-                        { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
-                        { url: 'http://ia.media-imdb.com/images/rock2.jpg' }
-                    ]
-                });
-
-                done();
-            });
-        });
-
-        it('handles missing image', (done) => {
-
-            const html = `<html>
-            <head>
-                <meta property="og:title" content="The Rock" />
-                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-            </head>
-            </html>`;
-
-            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
-
-                expect(description).to.equal({
-                    title: 'The Rock',
-                    type: 'website',
-                    url: 'http://www.imdb.com/title/tt0117500/'
-                });
-
-                done();
-            });
-        });
-
-        it('handles missing url', (done) => {
-
-            const html = `<html>
-            <head>
-                <meta property="og:title" content="The Rock" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
-            </head>
-            </html>`;
-
-            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
-
-                expect(description).to.equal({
-                    title: 'The Rock',
-                    type: 'website',
-                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
-                    url: 'http://www.imdb.com/title/tt0117500/'
-                });
-
-                done();
-            });
-        });
-
-        it('handles missing title', (done) => {
-
-            const html = `<html>
-            <head>
-                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
-            </head>
-            </html>`;
-
-            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
-
-                expect(description).to.equal({
-                    type: 'website',
-                    url: 'http://www.imdb.com/title/tt0117500/',
-                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' }
-                });
-
-                done();
-            });
-        });
-    });
-
-    describe('oembed()', () => {
-
-        it('ignores invalid oembed response (request error)', { parallel: false }, (done) => {
-
-            const html = `<html>
-            <head>
-                <link rel="alternate" type="application/json+oembed" href="https://publish.twitter.com/oembed?url=https://twitter.com/dalmaer/status/726624422237364226" title="Dion Almaer on Twitter: &quot;Maybe agile doesn&#39;t scale and that&#39;s ok https://t.co/DwrWCnCU38&quot;">
-            </head>
-            </html>`;
-
-            const orig = Wreck.get;
-            Wreck.get = (url, options, next) => {
-
-                Wreck.get = orig;
-                next(null, { statusCode: 400 }, '');
-            };
-
-            Metaphor.parse(html, 'https://twitter.com/dalmaer/status/726624422237364226', {}, (description) => {
-
-                expect(description).to.equal({
-                    url: 'https://twitter.com/dalmaer/status/726624422237364226',
-                    type: 'website'
-                });
-
-                done();
-            });
-        });
-
-        it('ignores invalid oembed response (network error)', { parallel: false }, (done) => {
-
-            const html = `<html>
-            <head>
-                <link rel="alternate" type="application/json+oembed" href="https://publish.twitter.com/oembed?url=https://twitter.com/dalmaer/status/726624422237364226" title="Dion Almaer on Twitter: &quot;Maybe agile doesn&#39;t scale and that&#39;s ok https://t.co/DwrWCnCU38&quot;">
-            </head>
-            </html>`;
-
-            const orig = Wreck.get;
-            Wreck.get = (url, options, next) => {
-
-                Wreck.get = orig;
-                next(new Error('Cannot reach host'));
-            };
-
-            Metaphor.parse(html, 'https://twitter.com/dalmaer/status/726624422237364226', {}, (description) => {
-
-                expect(description).to.equal({
-                    url: 'https://twitter.com/dalmaer/status/726624422237364226',
-                    type: 'website'
-                });
-
-                done();
-            });
-        });
-
-        it('ignores invalid oembed response (wrong version)', { parallel: false }, (done) => {
-
-            const html = `<html>
-            <head>
-                <link rel="alternate" type="application/json+oembed" href="https://publish.twitter.com/oembed?url=https://twitter.com/dalmaer/status/726624422237364226" title="Dion Almaer on Twitter: &quot;Maybe agile doesn&#39;t scale and that&#39;s ok https://t.co/DwrWCnCU38&quot;">
-            </head>
-            </html>`;
-
-            const oembed = {
-                type: 'link',
-                version: '2.0',
-                url: 'https://twitter.com/dalmaer/status/726624422237364226',
-                provider_name: 'Twitter'
-            };
-
-            const orig = Wreck.get;
-            Wreck.get = (url, options, next) => {
-
-                Wreck.get = orig;
-                next(null, { statusCode: 200 }, JSON.stringify(oembed));
-            };
-
-            Metaphor.parse(html, 'https://twitter.com/dalmaer/status/726624422237364226', {}, (description) => {
-
-                expect(description).to.equal({
-                    url: 'https://twitter.com/dalmaer/status/726624422237364226',
-                    type: 'website'
-                });
-
-                done();
-            });
-        });
-
-        it('ignores invalid oembed response (invalid payload)', { parallel: false }, (done) => {
-
-            const html = `<html>
-            <head>
-                <link rel="alternate" type="application/json+oembed" href="https://publish.twitter.com/oembed?url=https://twitter.com/dalmaer/status/726624422237364226" title="Dion Almaer on Twitter: &quot;Maybe agile doesn&#39;t scale and that&#39;s ok https://t.co/DwrWCnCU38&quot;">
-            </head>
-            </html>`;
-
-            const orig = Wreck.get;
-            Wreck.get = (url, options, next) => {
-
-                Wreck.get = orig;
-                next(null, { statusCode: 200 }, '{');
-            };
-
-            Metaphor.parse(html, 'https://twitter.com/dalmaer/status/726624422237364226', {}, (description) => {
-
-                expect(description).to.equal({
-                    url: 'https://twitter.com/dalmaer/status/726624422237364226',
-                    type: 'website'
                 });
 
                 done();
