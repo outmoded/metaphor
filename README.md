@@ -1,2 +1,2 @@
 # metaphor
-Open Graph Metadata Collector
+Open Graph, Twitter Card, and OEmbed Metadata Collector
