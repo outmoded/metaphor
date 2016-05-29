@@ -151,65 +151,65 @@ describe('Metaphor', () => {
 
         it('described a YouTube video', (done) => {
 
-            Metaphor.describe('https://www.youtube.com/watch?v=nTnPCF9OWHM', {}, (err, description) => {
+            Metaphor.describe('https://www.youtube.com/watch?v=cWDdd5KKhts', {}, (err, description) => {
 
                 expect(err).to.not.exist();
                 expect(description).to.equal({
                     site_name: 'YouTube',
-                    url: 'https://www.youtube.com/watch?v=nTnPCF9OWHM',
-                    title: 'Episode #13 - FULL SHOW | Full Frontal with Samantha Bee | TBS',
-                    image: { url: 'https://i.ytimg.com/vi/nTnPCF9OWHM/maxresdefault.jpg' },
-                    description: 'Full episode from May 23, 2016. Watch Full Frontal with Samantha Bee Mondays at 10:30/ 9:30c on TBS!',
+                    url: 'https://www.youtube.com/watch?v=cWDdd5KKhts',
+                    title: 'Cheese Shop Sketch - Monty Python\'s Flying Circus',
+                    image: { url: 'https://i.ytimg.com/vi/cWDdd5KKhts/maxresdefault.jpg' },
+                    description: 'Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...',
                     type: 'video',
                     video: [
                         {
-                            url: 'https://www.youtube.com/embed/nTnPCF9OWHM',
-                            secure_url: 'https://www.youtube.com/embed/nTnPCF9OWHM',
+                            url: 'https://www.youtube.com/embed/cWDdd5KKhts',
+                            secure_url: 'https://www.youtube.com/embed/cWDdd5KKhts',
                             type: 'text/html',
-                            width: '1280',
-                            height: '720'
+                            width: '480',
+                            height: '360'
                         },
                         {
-                            url: 'http://www.youtube.com/v/nTnPCF9OWHM?version=3&autohide=1',
-                            secure_url: 'https://www.youtube.com/v/nTnPCF9OWHM?version=3&autohide=1',
+                            url: 'http://www.youtube.com/v/cWDdd5KKhts?version=3&autohide=1',
+                            secure_url: 'https://www.youtube.com/v/cWDdd5KKhts?version=3&autohide=1',
                             type: 'application/x-shockwave-flash',
-                            width: '1280',
-                            height: '720',
-                            tag: ['Full Frontal with Samantha Bee', 'Full Frontal', 'Samantha Bee', 'TBS']
+                            width: '480',
+                            height: '360',
+                            tag: ['Monty Python', 'Python (Monty) Pictures Limited', 'Comedy', 'flying circus', 'monty pythons flying circus', 'john cleese', 'micael palin', 'eric idle', 'terry jones', 'graham chapman', 'terry gilliam', 'funny', 'comedy', 'animation', '60s animation', 'humor', 'humour', 'sketch show', 'british comedy', 'cheese shop', 'monty python cheese', 'cheese shop sketch', 'cleese cheese', 'cheese']
                         }
                     ],
                     thumbnail: {
-                        url: 'https://i.ytimg.com/vi/nTnPCF9OWHM/hqdefault.jpg',
+                        url: 'https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg',
                         width: 480,
                         height: 360
                     },
                     embed: {
                         type: 'video',
-                        height: 270,
-                        width: 480,
-                        html: '<iframe width="480" height="270" src="https://www.youtube.com/embed/nTnPCF9OWHM?feature=oembed" frameborder="0" allowfullscreen></iframe>'
+                        height: 344,
+                        width: 459,
+                        html: '<iframe width="459" height="344" src="https://www.youtube.com/embed/cWDdd5KKhts?feature=oembed" frameborder="0" allowfullscreen></iframe>'
                     },
                     app: {
                         iphone: {
                             name: 'YouTube',
                             id: '544007664',
-                            url: 'vnd.youtube://www.youtube.com/watch?v=nTnPCF9OWHM&feature=applinks'
+                            url: 'vnd.youtube://www.youtube.com/watch?v=cWDdd5KKhts&feature=applinks'
                         },
                         ipad: {
                             name: 'YouTube',
                             id: '544007664',
-                            url: 'vnd.youtube://www.youtube.com/watch?v=nTnPCF9OWHM&feature=applinks'
+                            url: 'vnd.youtube://www.youtube.com/watch?v=cWDdd5KKhts&feature=applinks'
                         },
                         googleplay: {
                             name: 'YouTube',
                             id: 'com.google.android.youtube',
-                            url: 'https://www.youtube.com/watch?v=nTnPCF9OWHM'
+                            url: 'https://www.youtube.com/watch?v=cWDdd5KKhts'
                         }
                     },
                     player: {
-                        url: 'https://www.youtube.com/embed/nTnPCF9OWHM',
-                        width: '1280',
-                        height: '720'
+                        url: 'https://www.youtube.com/embed/cWDdd5KKhts',
+                        width: '480',
+                        height: '360'
                     },
                     twitter: { site_username: '@youtube' }
                 });
