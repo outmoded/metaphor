@@ -6,6 +6,7 @@ const Code = require('code');
 const Lab = require('lab');
 const Metaphor = require('..');
 const Wreck = require('wreck');
+const Providers = require('../providers.json');
 
 
 // Declare internals
@@ -134,6 +135,122 @@ describe('OEmbed', () => {
 
                 done();
             });
+        });
+    });
+
+    describe('match()', () => {
+
+        it('returns a full service endpoint', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const resource = 'http://nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
+            const url = router.match(resource);
+            expect(url).to.equal(`https://www.nytimes.com/svc/oembed/json/?url=${encodeURIComponent(resource)}&format=json`);
+            done();
+        });
+
+        it('returns a full service endpoint (options)', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const resource = 'http://nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
+            const url = router.match(resource, { maxWidth: 250, maxHeight: 120 });
+            expect(url).to.equal(`https://www.nytimes.com/svc/oembed/json/?url=${encodeURIComponent(resource)}&format=json&maxheight=120&maxwidth=250`);
+            done();
+        });
+
+        it('returns a null on mismatching url', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const resource = 'http://example.com';
+            const url = router.match(resource, { maxWidth: 250, maxHeight: 120 });
+            expect(url).to.be.null();
+            done();
+        });
+    });
+
+    describe('service()', () => {
+
+        it('parses oembed.com providers json file', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const url = router.service('http://nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article');
+            expect(url).to.equal('https://www.nytimes.com/svc/oembed/json/');
+            done();
+        });
+
+        it('matches resource (www)', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const url = router.service('http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article');
+            expect(url).to.equal('https://www.nytimes.com/svc/oembed/json/');
+            done();
+        });
+
+        it('matches resource (wildcard)', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const url = router.service('http://hammer-family.smugmug.com/Scotch/Bruichladdich/i-LLqFWHM');
+            expect(url).to.equal('http://api.smugmug.com/services/oembed/');
+            done();
+        });
+
+        it('matches resource (path)', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const url = router.service('https://photos.app.net/z/y');
+            expect(url).to.equal('https://alpha-api.app.net/oembed');
+            done();
+        });
+
+        it('fails to find a match (path)', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const url = router.service('https://alpha.app.net/z/y');
+            expect(url).to.be.null();
+            done();
+        });
+
+        it('fails to find a match (short)', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const url = router.service('http://streamonecloud.net/embed/x');
+            expect(url).to.be.null();
+            done();
+        });
+
+        it('fails to find a match (long)', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const url = router.service('http://x.content.streamonecloud.net/embed/x');
+            expect(url).to.be.null();
+            done();
+        });
+
+        it('fails to find a match (longer)', (done) => {
+
+            const router = Metaphor.oembed.providers(Providers);
+            const url = router.service('http://y.x.content.streamonecloud.net/embed/x');
+            expect(url).to.be.null();
+            done();
+        });
+
+        it('ignores invalid endpoint scheme', (done) => {
+
+            const router = Metaphor.oembed.providers([
+                {
+                    provider_name: 'Test provider',
+                    provider_url: 'https:\/\/example.com\/',
+                    endpoints: [
+                        {
+                            schemes: ['ftp:\/\/example.com\/*\/post\/*'],
+                            url: 'https:\/\/example.com\/oembed'
+                        }
+                    ]
+                }
+            ]);
+
+            expect(router._domains.subs).to.be.empty();
+            done();
         });
     });
 });

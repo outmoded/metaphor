@@ -1112,10 +1112,7 @@
         "provider_url": "https:\/\/www.nytimes.com",
         "endpoints": [
             {
-                "schemes": [
-                    "https:\/\/www.nytimes.com\/svc\/oembed"
-                ],
-                "url": "https:\/\/www.nytimes.com\/svc\/oembed",
+                "url": "https:\/\/www.nytimes.com\/svc\/oembed\/{format}\/",
                 "discovery": true
             }
         ]

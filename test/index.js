@@ -6,6 +6,7 @@ const Code = require('code');
 const Lab = require('lab');
 const Metaphor = require('..');
 const Wreck = require('wreck');
+const Providers = require('../providers.json');
 
 
 // Declare internals
@@ -22,6 +23,86 @@ const expect = Code.expect;
 
 
 describe('Metaphor', () => {
+
+    describe('Engine', () => {
+
+        describe('describe()', () => {
+
+            it('describes a NY Times article', (done) => {
+
+                const engine = new Metaphor.Engine();
+                const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
+                engine.describe(resource, (err, description) => {
+
+                    expect(err).to.not.exist();
+                    expect(description).to.equal({
+                        type: 'website',
+                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article',
+                        site_name: 'The New York Times',
+                        thumbnail: {
+                            url: 'https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg',
+                            width: 440,
+                            height: 293
+                        },
+                        embed: {
+                            type: 'rich',
+                            height: 550,
+                            width: 300,
+                            url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
+                            html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
+                        }
+                    });
+
+                    done();
+                });
+            });
+
+            it('describes a NY Times article (options)', (done) => {
+
+                const engine = new Metaphor.Engine({ maxHeight: 100, maxWidth: 100, providers: Providers });
+                const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
+                engine.describe(resource, (err, description) => {
+
+                    expect(err).to.not.exist();
+                    expect(description).to.equal({
+                        type: 'website',
+                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article',
+                        site_name: 'The New York Times',
+                        thumbnail: {
+                            url: 'https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg',
+                            width: 440,
+                            height: 293
+                        },
+                        embed: {
+                            type: 'rich',
+                            height: 550,
+                            width: 300,
+                            url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
+                            html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
+                        }
+                    });
+
+                    done();
+                });
+            });
+
+            it('skips using a providers list', (done) => {
+
+                const engine = new Metaphor.Engine({ providers: false });
+                const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
+                engine.describe(resource, (err, description) => {
+
+                    expect(err).to.exist();
+                    expect(description).to.equal({
+                        type: 'website',
+                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article'
+                    });
+
+                    done();
+                });
+            });
+        });
+    });
 
     describe('describe()', () => {
 
@@ -255,10 +336,10 @@ describe('Metaphor', () => {
 
         it('handles invalid domain', (done) => {
 
-            Metaphor.describe('https://no_such_domain/1', {}, (err, description) => {
+            Metaphor.describe('http://no_such_domain/1', {}, (err, description) => {
 
                 expect(err).to.exist();
-                expect(description).to.equal({ type: 'website', url: 'https://no_such_domain/1' });
+                expect(description).to.equal({ type: 'website', url: 'http://no_such_domain/1' });
                 done();
             });
         });
