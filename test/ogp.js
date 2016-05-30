@@ -35,6 +35,9 @@ describe('Open Graph', () => {
                 <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
                 <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
                 <meta property="og:image" content="http://ia.media-imdb.com/images/rock2.jpg" />
+                <meta property="og:image:unknown" content="ignore" />
+                <meta property="og:unknown" content="ignore" />
+                <meta property="og:title:ignore" content="ignore" />
             </head>
             <body>
                 <meta property="og:image" content="ignore2" />
