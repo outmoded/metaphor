@@ -140,7 +140,8 @@ describe('Metaphor', () => {
                     updated_time: description.updated_time,
                     title: '300/365 "The Lonely Gold Rush"',
                     description: '27.07.15  So this is it, day 300. The real count down begins now I guess.  Also found a pickaxe at my house moment before I even shot this. I seem to have strange and worrisome objects at my house. The first one I was looking for was a spear. And I\'m still in need of another deadly prop for this series. A lot has been said with very few words. Don\'t worry I\'m not a murderer. HOnestly I was searching for the spear first as I had a stronger concept, well it has a stronger meaning to it for me, bur alas I couldn\'t find it in time. I have seince then loaceted it after I\'ve shot this. But time was of the essence.   In other news I\'m planning a new photographic series and have been doing some research and sketching. On the downside I don\'t think I\'ll be shooting any of them until this project is over.',
-                    type: 'flickr_photos:photo',
+                    type: 'custom',
+                    custom_type: 'flickr_photos:photo',
                     url: 'https://www.flickr.com/photos/kent-macdonald/19455364653/',
                     image: {
                         url: 'https://c1.staticflickr.com/1/259/19455364653_201bdfd31b_b.jpg',
