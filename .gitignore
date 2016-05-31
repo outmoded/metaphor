@@ -2,6 +2,7 @@ npm-debug.log
 dump.rdb
 node_modules
 npm-shrinkwrap.json
+.idea
 .DS_Store
 */.DS_Store
 */*/.DS_Store
