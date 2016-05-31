@@ -182,7 +182,7 @@ describe('Metaphor', () => {
                     updated_time: description.updated_time,
                     title: '300/365 "The Lonely Gold Rush"',
                     description: '27.07.15  So this is it, day 300. The real count down begins now I guess.  Also found a pickaxe at my house moment before I even shot this. I seem to have strange and worrisome objects at my house. The first one I was looking for was a spear. And I\'m still in need of another deadly prop for this series. A lot has been said with very few words. Don\'t worry I\'m not a murderer. HOnestly I was searching for the spear first as I had a stronger concept, well it has a stronger meaning to it for me, bur alas I couldn\'t find it in time. I have seince then loaceted it after I\'ve shot this. But time was of the essence.   In other news I\'m planning a new photographic series and have been doing some research and sketching. On the downside I don\'t think I\'ll be shooting any of them until this project is over.',
-                    type: 'custom',
+                    type: 'photo',
                     custom_type: 'flickr_photos:photo',
                     url: 'https://www.flickr.com/photos/kent-macdonald/19455364653/',
                     image: {
@@ -210,7 +210,8 @@ describe('Metaphor', () => {
                         }
                     },
                     twitter: { site_username: '@flickr' },
-                    sources: ['ogp', 'oembed', 'twitter']
+                    icon: { any: 'https://s.yimg.com/pw/images/icon_black_white.svg' },
+                    sources: ['ogp', 'resource', 'oembed', 'twitter']
                 });
 
                 done();
@@ -336,7 +337,13 @@ describe('Metaphor', () => {
                         height: '360'
                     },
                     twitter: { site_username: '@youtube' },
-                    sources: ['ogp', 'oembed', 'twitter']
+                    icon: {
+                        '32': '//s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
+                        '48': '//s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png',
+                        '96': '//s.ytimg.com/yts/img/favicon_96-vfldSA3ca.png',
+                        '144': '//s.ytimg.com/yts/img/favicon_144-vflWmzoXw.png'
+                    },
+                    sources: ['ogp', 'resource', 'oembed', 'twitter']
                 });
 
                 done();

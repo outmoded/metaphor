@@ -129,6 +129,32 @@ describe('Open Graph', () => {
             });
         });
 
+        it('ignores unknown custom sub type', (done) => {
+
+            const html = `<html>
+            <head>
+                <meta property="og:title" content="The Rock" />
+                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
+                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
+                <meta property="og:type" content="custom:unknown" />
+            </head>
+            </html>`;
+
+            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
+
+                expect(description).to.equal({
+                    title: 'The Rock',
+                    type: 'custom',
+                    custom_type: 'custom:unknown',
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
+                    sources: ['ogp']
+                });
+
+                done();
+            });
+        });
+
         it('ignore sub properties in the wrong place', (done) => {
 
             const html = `<html prefix="og: http://ogp.me/ns#">
