@@ -338,10 +338,10 @@ describe('Metaphor', () => {
                     },
                     twitter: { site_username: '@youtube' },
                     icon: {
-                        '32': '//s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
-                        '48': '//s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png',
-                        '96': '//s.ytimg.com/yts/img/favicon_96-vfldSA3ca.png',
-                        '144': '//s.ytimg.com/yts/img/favicon_144-vflWmzoXw.png'
+                        '32': 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
+                        '48': 'https://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png',
+                        '96': 'https://s.ytimg.com/yts/img/favicon_96-vfldSA3ca.png',
+                        '144': 'https://s.ytimg.com/yts/img/favicon_144-vflWmzoXw.png'
                     },
                     sources: ['ogp', 'resource', 'oembed', 'twitter']
                 });
