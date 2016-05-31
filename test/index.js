@@ -32,9 +32,8 @@ describe('Metaphor', () => {
 
                 const engine = new Metaphor.Engine();
                 const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
-                engine.describe(resource, (err, description) => {
+                engine.describe(resource, (description) => {
 
-                    expect(err).to.not.exist();
                     expect(description).to.equal({
                         type: 'website',
                         url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article',
@@ -50,7 +49,8 @@ describe('Metaphor', () => {
                             width: 300,
                             url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
                             html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
-                        }
+                        },
+                        sources: ['oembed']
                     });
 
                     done();
@@ -61,9 +61,8 @@ describe('Metaphor', () => {
 
                 const engine = new Metaphor.Engine({ maxHeight: 100, maxWidth: 100, providers: Providers });
                 const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
-                engine.describe(resource, (err, description) => {
+                engine.describe(resource, (description) => {
 
-                    expect(err).to.not.exist();
                     expect(description).to.equal({
                         type: 'website',
                         url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article',
@@ -79,7 +78,8 @@ describe('Metaphor', () => {
                             width: 300,
                             url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
                             html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
-                        }
+                        },
+                        sources: ['oembed']
                     });
 
                     done();
@@ -90,9 +90,8 @@ describe('Metaphor', () => {
 
                 const engine = new Metaphor.Engine({ providers: false });
                 const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
-                engine.describe(resource, (err, description) => {
+                engine.describe(resource, (description) => {
 
-                    expect(err).to.exist();
                     expect(description).to.equal({
                         type: 'website',
                         url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article'
@@ -108,9 +107,8 @@ describe('Metaphor', () => {
 
         it('describes a tweet', (done) => {
 
-            Metaphor.describe('https://twitter.com/sideway/status/626158822705401856', {}, (err, description) => {
+            Metaphor.describe('https://twitter.com/sideway/status/626158822705401856', {}, (description) => {
 
-                expect(err).to.not.exist();
                 expect(description).to.equal({
                     url: 'https://twitter.com/sideway/status/626158822705401856',
                     type: 'article',
@@ -123,7 +121,8 @@ describe('Metaphor', () => {
                         html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
                         width: 550,
                         type: 'rich'
-                    }
+                    },
+                    sources: ['ogp', 'oembed']
                 });
 
                 done();
@@ -132,9 +131,8 @@ describe('Metaphor', () => {
 
         it('describes a flickr photo', (done) => {
 
-            Metaphor.describe('https://www.flickr.com/photos/kent-macdonald/19455364653/', { maxWidth: 400, maxHeight: 200 }, (err, description) => {
+            Metaphor.describe('https://www.flickr.com/photos/kent-macdonald/19455364653/', { maxWidth: 400, maxHeight: 200 }, (description) => {
 
-                expect(err).to.not.exist();
                 expect(description).to.equal({
                     site_name: 'Flickr - Photo Sharing!',
                     updated_time: description.updated_time,
@@ -167,7 +165,8 @@ describe('Metaphor', () => {
                             url: 'flickr://flickr.com/photos/kent-macdonald/19455364653/'
                         }
                     },
-                    twitter: { site_username: '@flickr' }
+                    twitter: { site_username: '@flickr' },
+                    sources: ['ogp', 'oembed', 'twitter']
                 });
 
                 done();
@@ -176,9 +175,8 @@ describe('Metaphor', () => {
 
         it('describes an image', (done) => {
 
-            Metaphor.describe('https://www.sideway.com/sideway.png', {}, (err, description) => {
+            Metaphor.describe('https://www.sideway.com/sideway.png', {}, (description) => {
 
-                expect(err).to.not.exist();
                 expect(description).to.equal({
                     url: 'https://www.sideway.com/sideway.png',
                     type: 'website',
@@ -186,7 +184,8 @@ describe('Metaphor', () => {
                         url: 'https://www.sideway.com/sideway.png',
                         type: 'photo',
                         size: 17014
-                    }
+                    },
+                    sources: ['resource']
                 });
 
                 done();
@@ -195,9 +194,8 @@ describe('Metaphor', () => {
 
         it('describes an article', (done) => {
 
-            Metaphor.describe('http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/', {}, (err, description) => {
+            Metaphor.describe('http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/', {}, (description) => {
 
-                expect(err).to.not.exist();
                 expect(description).to.equal({
                     type: 'article',
                     title: 'Google Doesn\u2019t Owe Oracle a Cent for Using Java in Android, Jury Finds',
@@ -224,7 +222,8 @@ describe('Metaphor', () => {
                     twitter: {
                         site_username: '@wired',
                         creator_username: '@wired'
-                    }
+                    },
+                    sources: ['ogp', 'oembed', 'twitter']
                 });
 
                 done();
@@ -233,9 +232,8 @@ describe('Metaphor', () => {
 
         it('described a YouTube video', (done) => {
 
-            Metaphor.describe('https://www.youtube.com/watch?v=cWDdd5KKhts', {}, (err, description) => {
+            Metaphor.describe('https://www.youtube.com/watch?v=cWDdd5KKhts', {}, (description) => {
 
-                expect(err).to.not.exist();
                 expect(description).to.equal({
                     site_name: 'YouTube',
                     url: 'https://www.youtube.com/watch?v=cWDdd5KKhts',
@@ -293,7 +291,8 @@ describe('Metaphor', () => {
                         width: '480',
                         height: '360'
                     },
-                    twitter: { site_username: '@youtube' }
+                    twitter: { site_username: '@youtube' },
+                    sources: ['ogp', 'oembed', 'twitter']
                 });
 
                 done();
@@ -302,9 +301,8 @@ describe('Metaphor', () => {
 
         it('describes a resource with redirection', (done) => {
 
-            Metaphor.describe('https://twitter.com/x/status/626158822705401856', {}, (err, description) => {
+            Metaphor.describe('https://twitter.com/x/status/626158822705401856', {}, (description) => {
 
-                expect(err).to.not.exist();
                 expect(description).to.equal({
                     title: 'Sideway on Twitter',
                     image: { url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg' },
@@ -317,7 +315,8 @@ describe('Metaphor', () => {
                         html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
                         width: 550,
                         type: 'rich'
-                    }
+                    },
+                    sources: ['ogp', 'oembed']
                 });
 
                 done();
@@ -326,10 +325,8 @@ describe('Metaphor', () => {
 
         it('handles missing document', (done) => {
 
-            Metaphor.describe('https://twitter.com/sideway/status/1', {}, (err, description) => {
+            Metaphor.describe('https://twitter.com/sideway/status/1', {}, (description) => {
 
-                expect(err).to.exist();
-                expect(err.message).to.equal('Failed obtaining document');
                 expect(description).to.equal({ type: 'website', url: 'https://twitter.com/sideway/status/1' });
                 done();
             });
@@ -337,9 +334,8 @@ describe('Metaphor', () => {
 
         it('handles invalid domain', (done) => {
 
-            Metaphor.describe('http://no_such_domain/1', {}, (err, description) => {
+            Metaphor.describe('http://no_such_domain/1', {}, (description) => {
 
-                expect(err).to.exist();
                 expect(description).to.equal({ type: 'website', url: 'http://no_such_domain/1' });
                 done();
             });
@@ -355,9 +351,8 @@ describe('Metaphor', () => {
                 return { abort: () => { } };
             };
 
-            Metaphor.describe('https://example.com/invalid', {}, (err, description) => {
+            Metaphor.describe('https://example.com/invalid', {}, (description) => {
 
-                expect(err).to.not.exist();
                 expect(description).to.equal({ type: 'website', url: 'https://example.com/invalid' });
                 done();
             });
@@ -376,23 +371,23 @@ describe('Metaphor', () => {
                 });
             };
 
-            Metaphor.describe('https://www.sideway.com/sideway.png', {}, (err, description) => {
+            Metaphor.describe('https://www.sideway.com/sideway.png', {}, (description) => {
 
-                expect(err).to.not.exist();
                 expect(description).to.equal({
                     url: 'https://www.sideway.com/sideway.png',
                     type: 'website',
                     embed: {
                         url: 'https://www.sideway.com/sideway.png',
                         type: 'photo'
-                    }
+                    },
+                    sources: ['resource']
                 });
 
                 done();
             });
         });
 
-        it('errors on missing content-type', { parallel: false }, (done) => {
+        it('handles missing content-type', { parallel: false }, (done) => {
 
             const orig = Wreck.request;
             Wreck.request = (method, url, options, next) => {
@@ -402,15 +397,14 @@ describe('Metaphor', () => {
                 return { abort: () => { } };
             };
 
-            Metaphor.describe('https://example.com/invalid', {}, (err, description) => {
+            Metaphor.describe('https://example.com/invalid', {}, (description) => {
 
-                expect(err).to.be.an.error('Failed obtaining document');
                 expect(description).to.equal({ type: 'website', url: 'https://example.com/invalid' });
                 done();
             });
         });
 
-        it('errors on invalid content-type', { parallel: false }, (done) => {
+        it('handles on invalid content-type', { parallel: false }, (done) => {
 
             const orig = Wreck.request;
             Wreck.request = (method, url, options, next) => {
@@ -420,15 +414,14 @@ describe('Metaphor', () => {
                 return { abort: () => { } };
             };
 
-            Metaphor.describe('https://example.com/invalid', {}, (err, description) => {
+            Metaphor.describe('https://example.com/invalid', {}, (description) => {
 
-                expect(err).to.be.an.error('Failed obtaining document');
                 expect(description).to.equal({ type: 'website', url: 'https://example.com/invalid' });
                 done();
             });
         });
 
-        it('errors on invalid response object', { parallel: false }, (done) => {
+        it('handles on invalid response object', { parallel: false }, (done) => {
 
             const origRequest = Wreck.request;
             Wreck.request = (method, url, options, next) => {
@@ -445,9 +438,8 @@ describe('Metaphor', () => {
                 return next(new Error('Invalid'));
             };
 
-            Metaphor.describe('https://example.com/invalid', {}, (err, description) => {
+            Metaphor.describe('https://example.com/invalid', {}, (description) => {
 
-                expect(err).to.be.an.error('Failed obtaining document');
                 expect(description).to.equal({ type: 'website', url: 'https://example.com/invalid' });
                 done();
             });
@@ -475,7 +467,8 @@ describe('Metaphor', () => {
                         width: 550,
                         url: 'https://twitter.com/dalmaer/status/726624422237364226',
                         html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Maybe agile doesn&#39;t scale and that&#39;s ok <a href="https://t.co/DwrWCnCU38">https://t.co/DwrWCnCU38</a></p>&mdash; Dion Almaer (@dalmaer) <a href="https://twitter.com/dalmaer/status/726624422237364226">May 1, 2016</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
-                    }
+                    },
+                    sources: ['oembed']
                 });
 
                 done();
@@ -509,7 +502,8 @@ describe('Metaphor', () => {
                 expect(description).to.equal({
                     url: 'https://twitter.com/dalmaer/status/726624422237364226',
                     type: 'website',
-                    site_name: 'Twitter'
+                    site_name: 'Twitter',
+                    sources: ['oembed']
                 });
 
                 done();

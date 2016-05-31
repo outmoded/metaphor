@@ -53,7 +53,8 @@ describe('Open Graph', () => {
                     image: [
                         { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
                         { url: 'http://ia.media-imdb.com/images/rock2.jpg' }
-                    ]
+                    ],
+                    sources: ['ogp']
                 });
 
                 done();
@@ -96,7 +97,8 @@ describe('Open Graph', () => {
                     locale: {
                         primary: 'en_GB',
                         alternate: ['fr_FR', 'es_ES']
-                    }
+                    },
+                    sources: ['ogp']
                 });
 
                 done();
@@ -119,7 +121,8 @@ describe('Open Graph', () => {
                     title: 'The Rock',
                     type: 'website',
                     url: 'http://www.imdb.com/title/tt0117500/',
-                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' }
+                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
+                    sources: ['ogp']
                 });
 
                 done();
@@ -154,7 +157,8 @@ describe('Open Graph', () => {
                     image: [
                         { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
                         { url: 'http://ia.media-imdb.com/images/rock2.jpg' }
-                    ]
+                    ],
+                    sources: ['ogp']
                 });
 
                 done();
@@ -175,7 +179,8 @@ describe('Open Graph', () => {
                 expect(description).to.equal({
                     title: 'The Rock',
                     type: 'website',
-                    url: 'http://www.imdb.com/title/tt0117500/'
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    sources: ['ogp']
                 });
 
                 done();
@@ -197,7 +202,8 @@ describe('Open Graph', () => {
                     title: 'The Rock',
                     type: 'website',
                     image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
-                    url: 'http://www.imdb.com/title/tt0117500/'
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    sources: ['ogp']
                 });
 
                 done();
@@ -218,7 +224,8 @@ describe('Open Graph', () => {
                 expect(description).to.equal({
                     type: 'website',
                     url: 'http://www.imdb.com/title/tt0117500/',
-                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' }
+                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
+                    sources: ['ogp']
                 });
 
                 done();

@@ -50,7 +50,8 @@ describe('Open Graph', () => {
                     twitter: {
                         site_username: '@nytimes',
                         creator_id: '261289053'
-                    }
+                    },
+                    sources: ['twitter']
                 });
 
                 done();
@@ -79,7 +80,8 @@ describe('Open Graph', () => {
                     type: 'website',
                     description: 'The House energy and water bill failed after conservatives voted against their own legislation rather than acquiesce to a bipartisan amendment.',
                     title: 'G.O.P. Opposition to Gay Rights Provision Derails Spending Bill',
-                    twitter: { site_username: '@nytimes' }
+                    twitter: { site_username: '@nytimes' },
+                    sources: ['twitter']
                 });
 
                 done();
@@ -108,7 +110,8 @@ describe('Open Graph', () => {
                     type: 'website',
                     description: 'The House energy and water bill failed after conservatives voted against their own legislation rather than acquiesce to a bipartisan amendment.',
                     title: 'G.O.P. Opposition to Gay Rights Provision Derails Spending Bill',
-                    twitter: { site_username: '@nytimes' }
+                    twitter: { site_username: '@nytimes' },
+                    sources: ['twitter']
                 });
 
                 done();

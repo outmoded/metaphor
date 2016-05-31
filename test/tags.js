@@ -46,7 +46,8 @@ describe('Metaphor', () => {
                     title: 'The Rock',
                     type: 'video.movie',
                     url: 'http://www.imdb.com/title/tt0117500/',
-                    image: { url: 'http://ia.media-imdb.com/images/rock.jpg' }
+                    image: { url: 'http://ia.media-imdb.com/images/rock.jpg' },
+                    sources: ['ogp']
                 });
 
                 done();
@@ -73,7 +74,8 @@ describe('Metaphor', () => {
                     title: 'The Rock',
                     type: 'video.movie',
                     url: 'http://www.imdb.com/title/tt0117500/',
-                    image: { url: 'http://ia.media-imdb.com/images/rock.jpg' }
+                    image: { url: 'http://ia.media-imdb.com/images/rock.jpg' },
+                    sources: ['ogp']
                 });
 
                 done();
