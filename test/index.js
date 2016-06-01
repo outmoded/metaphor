@@ -30,7 +30,7 @@ describe('Metaphor', () => {
 
             it('describes a NY Times article', (done) => {
 
-                const engine = new Metaphor.Engine({ previewCssUrl: '/embed.css' });
+                const engine = new Metaphor.Engine({ css: '/embed.css' });
                 const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
                 engine.describe(resource, (description) => {
 
