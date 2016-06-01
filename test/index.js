@@ -606,6 +606,98 @@ describe('Metaphor', () => {
                     done();
                 });
             });
+
+            it('handles failed image size request', { parallel: false }, (done, onCleanup) => {
+
+                const orig = Wreck.request;
+                onCleanup((next) => {
+
+                    Wreck.request = orig;
+                    return next();
+                });
+
+                Wreck.request = (method, url, options, next) => {
+
+                    if (method === 'HEAD') {
+                        return next(new Error('failed'));
+                    }
+
+                    return orig.call(Wreck, method, url, options, next);
+                };
+
+                const engine = new Metaphor.Engine({ maxSize: 1024 * 1024 });
+                engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
+
+                    expect(description).to.equal({
+                        url: 'https://twitter.com/sideway/status/626158822705401856',
+                        type: 'article',
+                        title: 'Sideway on Twitter',
+                        image: {
+                            url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg'
+                        },
+                        description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                        site_name: 'Twitter',
+                        embed: {
+                            url: 'https://twitter.com/sideway/status/626158822705401856',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
+                            width: 550,
+                            type: 'rich'
+                        },
+                        sources: ['ogp', 'oembed'],
+                        preview: '<html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">Twitter</div><a class ="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div></div></div></body></html>'
+                    });
+
+                    done();
+                });
+            });
+
+            it('handles failed image size request (missing length)', { parallel: false }, (done, onCleanup) => {
+
+                const orig = Wreck.request;
+                onCleanup((next) => {
+
+                    Wreck.request = orig;
+                    return next();
+                });
+
+                Wreck.request = (method, url, options, next) => {
+
+                    if (method === 'HEAD') {
+                        return orig.call(Wreck, method, url, options, (err, res) => {
+
+                            delete res.headers['content-length'];
+                            return next(err, res);
+                        });
+                    }
+
+                    return orig.call(Wreck, method, url, options, next);
+                };
+
+                const engine = new Metaphor.Engine({ maxSize: 1024 * 1024 });
+                engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
+
+                    expect(description).to.equal({
+                        url: 'https://twitter.com/sideway/status/626158822705401856',
+                        type: 'article',
+                        title: 'Sideway on Twitter',
+                        image: {
+                            url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg'
+                        },
+                        description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                        site_name: 'Twitter',
+                        embed: {
+                            url: 'https://twitter.com/sideway/status/626158822705401856',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
+                            width: 550,
+                            type: 'rich'
+                        },
+                        sources: ['ogp', 'oembed'],
+                        preview: '<html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">Twitter</div><a class ="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div></div></div></body></html>'
+                    });
+
+                    done();
+                });
+            });
         });
     });
 
