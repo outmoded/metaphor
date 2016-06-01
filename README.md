@@ -125,7 +125,8 @@ A reusable engine used to set global processing settings for each description wh
             - `callback` - the callback method using the signature `function(preview)` where:
                 - `preview` - the HTML preview string or `null` to skip setting a preview.
     - `maxSize` - the maximum image size in bytes allowed to be included in an image preview. The limit
-      is only enforced when the size is known. Ignored when `preview` is disabled. Defaults to `1048576` (1Mb).
+      is only enforced when creating a `preview` (ignored when `preview` is disabled). When set, an HTTP
+      HEAD request is made to each image URL to obtain its size. Defaults to `false`.
     - `css` - if set to a URL, it is used as a style sheet link in the `preview`. Defaults to `false` (no link).
 
 ### `engine.describe(url, callback)`

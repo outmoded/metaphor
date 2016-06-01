@@ -66,6 +66,7 @@ describe('Open Graph', () => {
                 <meta name="twitter:site" value="@nytimes" />
                 <meta property="twitter:url" content="http://www.nytimes.com/2016/05/27/us/politics/house-budget-gay-rights-paul-ryan.html" />
                 <meta property="twitter:image:alt" content="something else" />
+                <meta property="twitter:image:height" content="ignore" />
             </head>
             <body>
             </body>

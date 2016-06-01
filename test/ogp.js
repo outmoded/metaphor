@@ -35,6 +35,7 @@ describe('Open Graph', () => {
                 <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
                 <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
                 <meta property="og:image" content="http://ia.media-imdb.com/images/rock2.jpg" />
+                <meta property="og:image:height" content="ignore" />
                 <meta property="og:image:unknown" content="ignore" />
                 <meta property="og:unknown" content="ignore" />
                 <meta property="og:title:ignore" content="ignore" />
@@ -91,7 +92,7 @@ describe('Open Graph', () => {
                     type: 'video.movie',
                     url: 'http://www.imdb.com/title/tt0117500/',
                     image: [
-                        { url: 'http://ia.media-imdb.com/images/rock1.jpg', width: '500', height: '330' },
+                        { url: 'http://ia.media-imdb.com/images/rock1.jpg', width: 500, height: 330 },
                         { url: 'https://ia.media-imdb.com/images/rock2.jpg' }
                     ],
                     locale: {

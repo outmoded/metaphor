@@ -41,7 +41,8 @@ describe('Metaphor', () => {
                         thumbnail: {
                             url: 'https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg',
                             width: 440,
-                            height: 293
+                            height: 293,
+                            size: 34445
                         },
                         embed: {
                             type: 'rich',
@@ -156,7 +157,10 @@ describe('Metaphor', () => {
                         url: 'https://twitter.com/sideway/status/626158822705401856',
                         type: 'article',
                         title: 'Sideway on Twitter',
-                        image: { url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg' },
+                        image: {
+                            url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
+                            size: 14664
+                        },
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
                         embed: {
@@ -188,16 +192,19 @@ describe('Metaphor', () => {
                         url: 'https://www.flickr.com/photos/kent-macdonald/19455364653/',
                         image: {
                             url: 'https://c1.staticflickr.com/1/259/19455364653_201bdfd31b_b.jpg',
-                            width: '1024',
-                            height: '576'
+                            size: 278195,
+                            width: 1024,
+                            height: 576
                         },
                         thumbnail: {
                             url: 'https://farm1.staticflickr.com/259/19455364653_201bdfd31b_q.jpg',
+                            size: 15476,
                             width: 150,
                             height: 150
                         },
                         embed: {
                             type: 'photo',
+                            size: 21677,
                             height: 180,
                             width: 320,
                             url: 'https://farm1.staticflickr.com/259/19455364653_201bdfd31b_n.jpg',
@@ -267,9 +274,9 @@ describe('Metaphor', () => {
                 });
             });
 
-            it('describes an image (no max size)', (done) => {
+            it('describes an image (large max size)', (done) => {
 
-                const engine = new Metaphor.Engine({ maxSize: false });
+                const engine = new Metaphor.Engine({ maxSize: 18000 });
                 engine.describe('https://www.sideway.com/sideway.png', (description) => {
 
                     expect(description).to.equal({
@@ -299,8 +306,9 @@ describe('Metaphor', () => {
                         title: 'Google Doesn\u2019t Owe Oracle a Cent for Using Java in Android, Jury Finds',
                         image: {
                             url: 'http://www.wired.com/wp-content/uploads/2016/05/android-1200x630-e1464301027666.jpg',
-                            width: '1200',
-                            height: '630'
+                            size: 19189,
+                            width: 1200,
+                            height: 630
                         },
                         description: 'The verdict could have major implications for the future of software developments.',
                         locale: { primary: 'en_US' },
@@ -308,6 +316,7 @@ describe('Metaphor', () => {
                         site_name: 'WIRED',
                         thumbnail: {
                             url: 'http://www.wired.com/wp-content/uploads/2016/05/android.jpg',
+                            size: 424398,
                             width: 600,
                             height: 450
                         },
@@ -338,28 +347,32 @@ describe('Metaphor', () => {
                         site_name: 'YouTube',
                         url: 'https://www.youtube.com/watch?v=cWDdd5KKhts',
                         title: 'Cheese Shop Sketch - Monty Python\'s Flying Circus',
-                        image: { url: 'https://i.ytimg.com/vi/cWDdd5KKhts/maxresdefault.jpg' },
+                        image: {
+                            size: 106445,
+                            url: 'https://i.ytimg.com/vi/cWDdd5KKhts/maxresdefault.jpg'
+                        },
                         description: 'Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...',
                         type: 'video',
                         video: [
                             {
                                 url: 'https://www.youtube.com/embed/cWDdd5KKhts',
                                 type: 'text/html',
-                                width: '480',
-                                height: '360'
+                                width: 480,
+                                height: 360
                             },
                             {
                                 url: 'https://www.youtube.com/v/cWDdd5KKhts?version=3&autohide=1',
                                 type: 'application/x-shockwave-flash',
-                                width: '480',
-                                height: '360',
+                                width: 480,
+                                height: 360,
                                 tag: ['Monty Python', 'Python (Monty) Pictures Limited', 'Comedy', 'flying circus', 'monty pythons flying circus', 'john cleese', 'micael palin', 'eric idle', 'terry jones', 'graham chapman', 'terry gilliam', 'funny', 'comedy', 'animation', '60s animation', 'humor', 'humour', 'sketch show', 'british comedy', 'cheese shop', 'monty python cheese', 'cheese shop sketch', 'cleese cheese', 'cheese']
                             }
                         ],
                         thumbnail: {
                             url: 'https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg',
                             width: 480,
-                            height: 360
+                            height: 360,
+                            size: 30519
                         },
                         embed: {
                             type: 'video',
@@ -386,8 +399,8 @@ describe('Metaphor', () => {
                         },
                         player: {
                             url: 'https://www.youtube.com/embed/cWDdd5KKhts',
-                            width: '480',
-                            height: '360'
+                            width: 480,
+                            height: 360
                         },
                         twitter: { site_username: '@youtube' },
                         icon: {

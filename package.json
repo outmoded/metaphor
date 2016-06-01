@@ -19,6 +19,7 @@
         "content": "3.x.x",
         "hoek": "4.x.x",
         "htmlparser2": "3.x.x",
+        "items": "2.x.x",
         "joi": "8.x.x",
         "wreck": "7.x.x"
     },
