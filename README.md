@@ -23,24 +23,21 @@ engine.describe('https://www.youtube.com/watch?v=cWDdd5KKhts', (description) => 
 
     /*
     {
-        url: 'https://www.youtube.com/watch?v=cWDdd5KKhts',
-        sources: ['ogp', 'oembed', 'twitter'],
-        type: 'video',
         site_name: 'YouTube',
+        url: 'https://www.youtube.com/watch?v=cWDdd5KKhts',
         title: 'Cheese Shop Sketch - Monty Python\'s Flying Circus',
         image: { url: 'https://i.ytimg.com/vi/cWDdd5KKhts/maxresdefault.jpg' },
         description: 'Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...',
+        type: 'video',
         video: [
             {
                 url: 'https://www.youtube.com/embed/cWDdd5KKhts',
-                secure_url: 'https://www.youtube.com/embed/cWDdd5KKhts',
                 type: 'text/html',
                 width: '480',
                 height: '360'
             },
             {
-                url: 'http://www.youtube.com/v/cWDdd5KKhts?version=3&autohide=1',
-                secure_url: 'https://www.youtube.com/v/cWDdd5KKhts?version=3&autohide=1',
+                url: 'https://www.youtube.com/v/cWDdd5KKhts?version=3&autohide=1',
                 type: 'application/x-shockwave-flash',
                 width: '480',
                 height: '360',
@@ -80,7 +77,16 @@ engine.describe('https://www.youtube.com/watch?v=cWDdd5KKhts', (description) => 
             width: '480',
             height: '360'
         },
-        twitter: { site_username: '@youtube' }
+        twitter: { site_username: '@youtube' },
+        icon: {
+            '32': 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
+            '48': 'https://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png',
+            '96': 'https://s.ytimg.com/yts/img/favicon_96-vfldSA3ca.png',
+            '144': 'https://s.ytimg.com/yts/img/favicon_144-vflWmzoXw.png',
+            smallest: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png'
+        },
+        preview: '<html><head><title>Cheese Shop Sketch - Monty Python\'s Flying Circus</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png"/><div class="metaphor-embed-header-site">YouTube</div><a class ="metaphor-embed-header-link" href="https://www.youtube.com/watch?v=cWDdd5KKhts"><div class="metaphor-embed-header-title">Cheese Shop Sketch - Monty Python\'s Flying Circus</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...</div><img class="metaphor-embed-body-image" src="https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg"/></div></div></body></html>',
+        sources: ['ogp', 'resource', 'oembed', 'twitter']
     }
     */
 });
@@ -110,6 +116,16 @@ A reusable engine used to set global processing settings for each description wh
     - `maxHeight` - an optional integer passed to the oEmbed endpoint to limit the maximum height of elements
       in the description. While the protocol requires providers to comply, many do not so this is at best
       a recommendation.
+    - `preview` - can be set to:
+        - `true` - a HTML preview is generated and returned in `description.preview`. This is the default.
+        - `false` - no HTML preview is generated.
+        - a function with the signature `function(description, options, callback)` where:
+            - `description` - the resource description document.
+            - `options` - the engine settings.
+            - `callback` - the callback method using the signature `function(preview)` where:
+                - `preview` - the HTML preview string or `null` to skip setting a preview.
+    - `maxSize` - the maximum image size in bytes allowed to be included in an image preview. The limit
+      is only enforced when the size is known. Ignored when `preview` is disabled. Defaults to `1048576` (1Mb).
 
 ### `engine.describe(url, callback)`
 

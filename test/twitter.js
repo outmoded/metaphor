@@ -58,6 +58,34 @@ describe('Open Graph', () => {
             });
         });
 
+        it('handles missing image url', (done) => {
+
+            const html = `<html>
+            <head>
+                <meta name="twitter:card" value="summary" />
+                <meta name="twitter:site" value="@nytimes" />
+                <meta property="twitter:url" content="http://www.nytimes.com/2016/05/27/us/politics/house-budget-gay-rights-paul-ryan.html" />
+                <meta property="twitter:image:alt" content="something else" />
+            </head>
+            <body>
+            </body>
+            </html>`;
+
+            Metaphor.parse(html, 'https://example.com', {}, (description) => {
+
+                expect(description).to.equal({
+                    url: 'https://example.com',
+                    type: 'website',
+                    twitter: {
+                        site_username: '@nytimes'
+                    },
+                    sources: ['twitter']
+                });
+
+                done();
+            });
+        });
+
         it('ignores unknown app', (done) => {
 
             const html = `<html>

@@ -92,7 +92,7 @@ describe('Open Graph', () => {
                     url: 'http://www.imdb.com/title/tt0117500/',
                     image: [
                         { url: 'http://ia.media-imdb.com/images/rock1.jpg', width: '500', height: '330' },
-                        { url: 'http://ia.media-imdb.com/images/rock2.jpg', secure_url: 'https://ia.media-imdb.com/images/rock2.jpg' }
+                        { url: 'https://ia.media-imdb.com/images/rock2.jpg' }
                     ],
                     locale: {
                         primary: 'en_GB',
@@ -242,6 +242,30 @@ describe('Open Graph', () => {
             <head>
                 <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
                 <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
+            </head>
+            </html>`;
+
+            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
+
+                expect(description).to.equal({
+                    type: 'website',
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
+                    sources: ['ogp']
+                });
+
+                done();
+            });
+        });
+
+        it('handles duplicate image url', (done) => {
+
+            const html = `<html>
+            <head>
+                <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
+                <meta property="og:image" content="wrong" />
+                <meta property="og:image:secure_url" content="http://ia.media-imdb.com/images/rock0.jpg" />
+                <meta property="og:image:secure_url" content="http://ia.media-imdb.com/images/rock1.jpg" />
             </head>
             </html>`;
 
