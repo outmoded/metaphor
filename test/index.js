@@ -30,14 +30,22 @@ describe('Metaphor', () => {
 
             it('describes a NY Times article', (done) => {
 
-                const engine = new Metaphor.Engine({ css: '/embed.css' });
+                const engine = new Metaphor.Engine({ css: '/embed.css', providers: Providers });
                 const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
                 engine.describe(resource, (description) => {
 
                     expect(description).to.equal({
-                        type: 'website',
-                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article',
+                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
+                        type: 'article',
+                        title: 'Rise of Donald Trump Tracks Growing Debate Over Global Fascism',
+                        description: 'Mr. Trump\u2019s campaign has engendered impassioned discussion about the nature of his appeal and warnings from critics on the left and the right.',
+                        image: {
+                            url: 'https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-facebookJumbo.jpg',
+                            size: 122475
+                        },
+                        sources: ['ogp', 'oembed', 'resource', 'twitter'],
                         site_name: 'The New York Times',
+                        author: 'Peter Baker',
                         thumbnail: {
                             url: 'https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg',
                             width: 440,
@@ -51,37 +59,58 @@ describe('Metaphor', () => {
                             url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
                             html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
                         },
-                        sources: ['oembed'],
-                        preview: '<html><head><link rel="stylesheet" href="/embed.css"></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">The New York Times</div><a class ="metaphor-embed-header-link" href="http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article"><div class="metaphor-embed-header-title">http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article</div></a></div><div class=\'metaphor-embed-body\'><img class="metaphor-embed-body-image" src="https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg"/></div></div></body></html>'
+                        app: {
+                            googleplay: {
+                                name: 'NYTimes',
+                                id: 'com.nytimes.android',
+                                url: 'nytimes://reader/id/100000004437909'
+                            }
+                        },
+                        twitter: { site_username: '@nytimes', creator_username: 'peterbakernyt' },
+                        preview: '<html><head><title>Rise of Donald Trump Tracks Growing Debate Over Global Fascism</title><link rel="stylesheet" href="/embed.css"></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">The New York Times</div><a class ="metaphor-embed-header-link" href="http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html"><div class="metaphor-embed-header-title">Rise of Donald Trump Tracks Growing Debate Over Global Fascism</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">Mr. Trump\u2019s campaign has engendered impassioned discussion about the nature of his appeal and warnings from critics on the left and the right.</div><img class="metaphor-embed-body-image" src="https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg"/></div></div></body></html>'
                     });
 
                     done();
                 });
             });
 
-            it('describes a NY Times article (options)', (done) => {
+            it('uses the providers list', (done) => {
 
-                const engine = new Metaphor.Engine({ maxHeight: 100, maxWidth: 100, providers: Providers, preview: false });
-                const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html';
+                const engine = new Metaphor.Engine({ preview: false });
+                const resource = 'http://www.deviantart.com/art/Who-are-you-612604046';
                 engine.describe(resource, (description) => {
 
                     expect(description).to.equal({
+                        title: 'Who are you?',
+                        image: {
+                            url: 'http://orig15.deviantart.net/7150/f/2016/153/4/0/img_2814_kopie_2_by_maaira-da4q8b2.jpg',
+                            width: 675,
+                            height: 450
+                        },
+                        url: 'http://maaira.deviantart.com/art/Who-are-you-612604046',
+                        description: 'Nova meets cows.',
                         type: 'website',
-                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
-                        site_name: 'The New York Times',
+                        sources: ['ogp', 'oembed', 'resource', 'twitter'],
+                        site_name: 'DeviantArt',
+                        icon: {
+                            '48': 'http://st.deviantart.net/minish/touch-icons/android-48.png',
+                            '96': 'http://st.deviantart.net/minish/touch-icons/android-96.png',
+                            '144': 'http://st.deviantart.net/minish/touch-icons/android-144.png',
+                            '192': 'http://st.deviantart.net/minish/touch-icons/android-192.png',
+                            smallest: 'http://st.deviantart.net/minish/touch-icons/android-48.png'
+                        },
                         thumbnail: {
-                            url: 'https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg',
-                            width: 440,
-                            height: 293
+                            url: 'http://t01.deviantart.net/GRpFefgpAK8ZU15icNW3ZcgOrGE=/fit-in/300x900/filters:no_upscale():origin()/pre14/566b/th/pre/f/2016/153/4/0/img_2814_kopie_2_by_maaira-da4q8b2.jpg',
+                            width: 300,
+                            height: 200
                         },
                         embed: {
-                            type: 'rich',
-                            height: 550,
-                            width: 300,
-                            url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
-                            html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
+                            type: 'photo',
+                            height: 450,
+                            width: 675,
+                            url: 'http://orig15.deviantart.net/7150/f/2016/153/4/0/img_2814_kopie_2_by_maaira-da4q8b2.jpg'
                         },
-                        sources: ['oembed']
+                        twitter: { site_username: '@deviantart' }
                     });
 
                     done();
@@ -91,12 +120,28 @@ describe('Metaphor', () => {
             it('skips using a providers list', (done) => {
 
                 const engine = new Metaphor.Engine({ providers: false, preview: false });
-                const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html';
+                const resource = 'http://www.deviantart.com/art/Who-are-you-612604046';
                 engine.describe(resource, (description) => {
 
                     expect(description).to.equal({
+                        title: 'Who are you?',
+                        image: {
+                            url: 'http://orig15.deviantart.net/7150/f/2016/153/4/0/img_2814_kopie_2_by_maaira-da4q8b2.jpg',
+                            width: 675,
+                            height: 450
+                        },
+                        url: 'http://maaira.deviantart.com/art/Who-are-you-612604046',
+                        description: 'Nova meets cows.',
                         type: 'website',
-                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html'
+                        sources: ['ogp', 'resource', 'twitter'],
+                        icon: {
+                            '48': 'http://st.deviantart.net/minish/touch-icons/android-48.png',
+                            '96': 'http://st.deviantart.net/minish/touch-icons/android-96.png',
+                            '144': 'http://st.deviantart.net/minish/touch-icons/android-144.png',
+                            '192': 'http://st.deviantart.net/minish/touch-icons/android-192.png',
+                            smallest: 'http://st.deviantart.net/minish/touch-icons/android-48.png'
+                        },
+                        twitter: { site_username: '@deviantart' }
                     });
 
                     done();
@@ -105,27 +150,23 @@ describe('Metaphor', () => {
 
             it('describes a NY Times article (whitelisted)', (done) => {
 
-                const engine = new Metaphor.Engine({ whitelist: ['https://www.nytimes.com/*'], preview: false });
-                const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html';
-                engine.describe(resource, (description) => {
+                const engine = new Metaphor.Engine({ whitelist: ['https://twitter.com/*'], preview: false });
+                engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
 
                     expect(description).to.equal({
-                        type: 'website',
-                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
-                        site_name: 'The New York Times',
-                        thumbnail: {
-                            url: 'https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg',
-                            width: 440,
-                            height: 293
-                        },
+                        url: 'https://twitter.com/sideway/status/626158822705401856',
+                        type: 'article',
+                        title: 'Sideway on Twitter',
+                        image: { url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg' },
+                        description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                        site_name: 'Twitter',
                         embed: {
-                            type: 'rich',
-                            height: 550,
-                            width: 300,
-                            url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
-                            html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
+                            url: 'https://twitter.com/sideway/status/626158822705401856',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
+                            width: 550,
+                            type: 'rich'
                         },
-                        sources: ['oembed']
+                        sources: ['ogp', 'oembed']
                     });
 
                     done();
@@ -418,25 +459,87 @@ describe('Metaphor', () => {
                 });
             });
 
-            it('describes a resource with redirection', (done) => {
+            it('describes a resource with redirection and no cookies', { parallel: false }, (done, onCleanup) => {
+
+                const orig = Wreck.request;
+                onCleanup((next) => {
+
+                    Wreck.request = orig;
+                    return next();
+                });
+
+                Wreck.request = (method, url, options, next) => {
+
+                    setImmediate(() => {
+
+                        options.beforeRedirect('GET', 301, 'http://example.com/something', {}, {}, () => next(null, { statusCode: 301, headers: {} }));
+                    });
+
+                    return { abort: () => null };
+                };
 
                 const engine = new Metaphor.Engine({ preview: false });
-                engine.describe('https://twitter.com/x/status/626158822705401856', (description) => {
+                engine.describe('http://example.com/something', (description) => {
+
+                    expect(description).to.equal({ type: 'website', url: 'http://example.com/something' });
+
+                    done();
+                });
+            });
+
+            it('uses non-discovery oembed when resource request fails', { parallel: false }, (done) => {
+
+                const orig = Wreck.request;
+                Wreck.request = (method, url, options, next) => {
+
+                    Wreck.request = orig;
+                    setImmediate(() => next(new Error('failed')));
+                    return { abort: () => null };
+                };
+
+                const engine = new Metaphor.Engine({ preview: false });
+                const resource = 'http://www.deviantart.com/art/Who-are-you-612604046';
+                engine.describe(resource, (description) => {
 
                     expect(description).to.equal({
-                        title: 'Sideway on Twitter',
-                        image: { url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg' },
-                        description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
-                        site_name: 'Twitter',
-                        url: 'https://twitter.com/sideway/status/626158822705401856',
-                        type: 'article',
-                        embed: {
-                            url: 'https://twitter.com/sideway/status/626158822705401856',
-                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
-                            width: 550,
-                            type: 'rich'
+                        type: 'website',
+                        url: 'http://www.deviantart.com/art/Who-are-you-612604046',
+                        site_name: 'DeviantArt',
+                        thumbnail: {
+                            url: 'http://t01.deviantart.net/GRpFefgpAK8ZU15icNW3ZcgOrGE=/fit-in/300x900/filters:no_upscale():origin()/pre14/566b/th/pre/f/2016/153/4/0/img_2814_kopie_2_by_maaira-da4q8b2.jpg',
+                            width: 300,
+                            height: 200
                         },
-                        sources: ['ogp', 'oembed']
+                        embed: {
+                            type: 'photo',
+                            height: 450,
+                            width: 675,
+                            url: 'http://orig15.deviantart.net/7150/f/2016/153/4/0/img_2814_kopie_2_by_maaira-da4q8b2.jpg'
+                        },
+                        sources: ['oembed']
+                    });
+
+                    done();
+                });
+            });
+
+            it('skips non-discovery oembed when resource request fails', { parallel: false }, (done) => {
+
+                const orig = Wreck.request;
+                Wreck.request = (method, url, options, next) => {
+
+                    Wreck.request = orig;
+                    setImmediate(() => next(new Error('failed')));
+                    return { abort: () => null };
+                };
+
+                const engine = new Metaphor.Engine({ preview: false, providers: false });
+                const resource = 'http://www.deviantart.com/art/Who-are-you-612604046';
+                engine.describe(resource, (description) => {
+
+                    expect(description).to.equal({
+                        type: 'website',
+                        url: 'http://www.deviantart.com/art/Who-are-you-612604046'
                     });
 
                     done();
