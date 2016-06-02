@@ -46,6 +46,10 @@ describe('Metaphor', () => {
                         sources: ['ogp', 'oembed', 'resource', 'twitter'],
                         site_name: 'The New York Times',
                         author: 'Peter Baker',
+                        icon: {
+                            any: 'https://static01.nyt.com/favicon.ico',
+                            smallest: 'https://static01.nyt.com/favicon.ico'
+                        },
                         thumbnail: {
                             url: 'https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg',
                             width: 440,
@@ -67,7 +71,7 @@ describe('Metaphor', () => {
                             }
                         },
                         twitter: { site_username: '@nytimes', creator_username: 'peterbakernyt' },
-                        preview: '<html><head><title>Rise of Donald Trump Tracks Growing Debate Over Global Fascism</title><link rel="stylesheet" href="/embed.css"></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">The New York Times</div><a class ="metaphor-embed-header-link" href="http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html"><div class="metaphor-embed-header-title">Rise of Donald Trump Tracks Growing Debate Over Global Fascism</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">Mr. Trump\u2019s campaign has engendered impassioned discussion about the nature of his appeal and warnings from critics on the left and the right.</div><img class="metaphor-embed-body-image" src="https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg"/></div></div></body></html>'
+                        preview: '<html><head><title>Rise of Donald Trump Tracks Growing Debate Over Global Fascism</title><link rel="stylesheet" href="/embed.css"></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://static01.nyt.com/favicon.ico"/><div class="metaphor-embed-header-site">The New York Times</div><a class ="metaphor-embed-header-link" href="http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html"><div class="metaphor-embed-header-title">Rise of Donald Trump Tracks Growing Debate Over Global Fascism</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">Mr. Trump\u2019s campaign has engendered impassioned discussion about the nature of his appeal and warnings from critics on the left and the right.</div><img class="metaphor-embed-body-image" src="https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg"/></div></div></body></html>'
                     });
 
                     done();
@@ -97,6 +101,7 @@ describe('Metaphor', () => {
                             '96': 'http://st.deviantart.net/minish/touch-icons/android-96.png',
                             '144': 'http://st.deviantart.net/minish/touch-icons/android-144.png',
                             '192': 'http://st.deviantart.net/minish/touch-icons/android-192.png',
+                            any: 'http://i.deviantart.net/icons/da_favicon.ico',
                             smallest: 'http://st.deviantart.net/minish/touch-icons/android-48.png'
                         },
                         thumbnail: {
@@ -139,6 +144,7 @@ describe('Metaphor', () => {
                             '96': 'http://st.deviantart.net/minish/touch-icons/android-96.png',
                             '144': 'http://st.deviantart.net/minish/touch-icons/android-144.png',
                             '192': 'http://st.deviantart.net/minish/touch-icons/android-192.png',
+                            any: 'http://i.deviantart.net/icons/da_favicon.ico',
                             smallest: 'http://st.deviantart.net/minish/touch-icons/android-48.png'
                         },
                         twitter: { site_username: '@deviantart' }
@@ -148,25 +154,29 @@ describe('Metaphor', () => {
                 });
             });
 
-            it('describes a NY Times article (whitelisted)', (done) => {
+            it('describes a whitelisted resource', (done) => {
 
                 const engine = new Metaphor.Engine({ whitelist: ['https://twitter.com/*'], preview: false });
                 engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
 
                     expect(description).to.equal({
-                        url: 'https://twitter.com/sideway/status/626158822705401856',
                         type: 'article',
+                        url: 'https://twitter.com/sideway/status/626158822705401856',
                         title: 'Sideway on Twitter',
                         image: { url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg' },
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
-                        embed: {
-                            url: 'https://twitter.com/sideway/status/626158822705401856',
-                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
-                            width: 550,
-                            type: 'rich'
+                        sources: ['ogp', 'resource', 'oembed'],
+                        icon: {
+                            any: 'https://abs.twimg.com/favicons/favicon.ico',
+                            smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                         },
-                        sources: ['ogp', 'oembed']
+                        embed: {
+                            type: 'rich',
+                            width: 550,
+                            url: 'https://twitter.com/sideway/status/626158822705401856',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
+                        }
                     });
 
                     done();
@@ -195,8 +205,8 @@ describe('Metaphor', () => {
                 engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
 
                     expect(description).to.equal({
-                        url: 'https://twitter.com/sideway/status/626158822705401856',
                         type: 'article',
+                        url: 'https://twitter.com/sideway/status/626158822705401856',
                         title: 'Sideway on Twitter',
                         image: {
                             url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
@@ -204,14 +214,18 @@ describe('Metaphor', () => {
                         },
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
-                        embed: {
-                            url: 'https://twitter.com/sideway/status/626158822705401856',
-                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
-                            width: 550,
-                            type: 'rich'
+                        sources: ['ogp', 'resource', 'oembed'],
+                        icon: {
+                            any: 'https://abs.twimg.com/favicons/favicon.ico',
+                            smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                         },
-                        sources: ['ogp', 'oembed'],
-                        preview: '<html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">Twitter</div><a class ="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg"/></div></div></body></html>'
+                        embed: {
+                            type: 'rich',
+                            width: 550,
+                            url: 'https://twitter.com/sideway/status/626158822705401856',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
+                        },
+                        preview: '<html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class ="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg"/></div></div></body></html>'
                     });
 
                     done();
@@ -347,19 +361,24 @@ describe('Metaphor', () => {
                         title: 'Google Doesn\u2019t Owe Oracle a Cent for Using Java in Android, Jury Finds',
                         image: {
                             url: 'http://www.wired.com/wp-content/uploads/2016/05/android-1200x630-e1464301027666.jpg',
-                            size: 19189,
                             width: 1200,
-                            height: 630
+                            height: 630,
+                            size: 19189
                         },
                         description: 'The verdict could have major implications for the future of software developments.',
                         locale: { primary: 'en_US' },
                         url: 'http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/',
                         site_name: 'WIRED',
+                        sources: ['ogp', 'resource', 'oembed', 'twitter'],
+                        icon: {
+                            any: 'http://www.wired.com/wp-content/themes/Phoenix/assets/images/favicon.ico',
+                            smallest: 'http://www.wired.com/wp-content/themes/Phoenix/assets/images/favicon.ico'
+                        },
                         thumbnail: {
                             url: 'http://www.wired.com/wp-content/uploads/2016/05/android.jpg',
-                            size: 424398,
                             width: 600,
-                            height: 450
+                            height: 450,
+                            size: 424398
                         },
                         embed: {
                             type: 'rich',
@@ -367,12 +386,8 @@ describe('Metaphor', () => {
                             width: 600,
                             html: '<blockquote class="wp-embedded-content"><a href="http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/">Google Doesn&#8217;t Owe Oracle a Cent for Using Java in Android, Jury Finds</a></blockquote>\n<script type=\'text/javascript\'>\n<!--//--><![CDATA[//><!--\n\t\t!function(a,b){"use strict";function c(){if(!e){e=!0;var a,c,d,f,g=-1!==navigator.appVersion.indexOf("MSIE 10"),h=!!navigator.userAgent.match(/Trident.*rv:11\\./),i=b.querySelectorAll("iframe.wp-embedded-content");for(c=0;c<i.length;c++)if(d=i[c],!d.getAttribute("data-secret")){if(f=Math.random().toString(36).substr(2,10),d.src+="#?secret="+f,d.setAttribute("data-secret",f),g||h)a=d.cloneNode(!0),a.removeAttribute("security"),d.parentNode.replaceChild(a,d)}else;}}var d=!1,e=!1;if(b.querySelector)if(a.addEventListener)d=!0;if(a.wp=a.wp||{},!a.wp.receiveEmbedMessage)if(a.wp.receiveEmbedMessage=function(c){var d=c.data;if(d.secret||d.message||d.value)if(!/[^a-zA-Z0-9]/.test(d.secret)){var e,f,g,h,i,j=b.querySelectorAll(\'iframe[data-secret="\'+d.secret+\'"]\'),k=b.querySelectorAll(\'blockquote[data-secret="\'+d.secret+\'"]\');for(e=0;e<k.length;e++)k[e].style.display="none";for(e=0;e<j.length;e++)if(f=j[e],c.source===f.contentWindow){if(f.removeAttribute("style"),"height"===d.message){if(g=parseInt(d.value,10),g>1e3)g=1e3;else if(200>~~g)g=200;f.height=g}if("link"===d.message)if(h=b.createElement("a"),i=b.createElement("a"),h.href=f.getAttribute("src"),i.href=d.value,i.host===h.host)if(b.activeElement===f)a.top.location.href=d.value}else;}},d)a.addEventListener("message",a.wp.receiveEmbedMessage,!1),b.addEventListener("DOMContentLoaded",c,!1),a.addEventListener("load",c,!1)}(window,document);\n//--><!]]>\n</script><iframe sandbox="allow-scripts" security="restricted" src="http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/embed/" width="600" height="338" title="&#8220;Google Doesn&#8217;t Owe Oracle a Cent for Using Java in Android, Jury Finds&#8221; &#8212; WIRED" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="wp-embedded-content"></iframe>'
                         },
-                        twitter: {
-                            site_username: '@wired',
-                            creator_username: '@wired'
-                        },
-                        preview: '<html><head><title>Google Doesn\u2019t Owe Oracle a Cent for Using Java in Android, Jury Finds</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">WIRED</div><a class ="metaphor-embed-header-link" href="http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/"><div class="metaphor-embed-header-title">Google Doesn\u2019t Owe Oracle a Cent for Using Java in Android, Jury Finds</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">The verdict could have major implications for the future of software developments.</div><img class="metaphor-embed-body-image" src="http://www.wired.com/wp-content/uploads/2016/05/android.jpg"/></div></div></body></html>',
-                        sources: ['ogp', 'oembed', 'twitter']
+                        twitter: { site_username: '@wired', creator_username: '@wired' },
+                        preview: '<html><head><title>Google Doesn\u2019t Owe Oracle a Cent for Using Java in Android, Jury Finds</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="http://www.wired.com/wp-content/themes/Phoenix/assets/images/favicon.ico"/><div class="metaphor-embed-header-site">WIRED</div><a class ="metaphor-embed-header-link" href="http://www.wired.com/2016/05/google-doesnt-owe-oracle-cent-using-java-android-jury-finds/"><div class="metaphor-embed-header-title">Google Doesn\u2019t Owe Oracle a Cent for Using Java in Android, Jury Finds</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">The verdict could have major implications for the future of software developments.</div><img class="metaphor-embed-body-image" src="http://www.wired.com/wp-content/uploads/2016/05/android.jpg"/></div></div></body></html>'
                     });
 
                     done();
@@ -389,8 +404,8 @@ describe('Metaphor', () => {
                         url: 'https://www.youtube.com/watch?v=cWDdd5KKhts',
                         title: 'Cheese Shop Sketch - Monty Python\'s Flying Circus',
                         image: {
-                            size: 106445,
-                            url: 'https://i.ytimg.com/vi/cWDdd5KKhts/maxresdefault.jpg'
+                            url: 'https://i.ytimg.com/vi/cWDdd5KKhts/maxresdefault.jpg',
+                            size: 106445
                         },
                         description: 'Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...',
                         type: 'video',
@@ -409,6 +424,15 @@ describe('Metaphor', () => {
                                 tag: ['Monty Python', 'Python (Monty) Pictures Limited', 'Comedy', 'flying circus', 'monty pythons flying circus', 'john cleese', 'micael palin', 'eric idle', 'terry jones', 'graham chapman', 'terry gilliam', 'funny', 'comedy', 'animation', '60s animation', 'humor', 'humour', 'sketch show', 'british comedy', 'cheese shop', 'monty python cheese', 'cheese shop sketch', 'cleese cheese', 'cheese']
                             }
                         ],
+                        sources: ['ogp', 'resource', 'oembed', 'twitter'],
+                        icon: {
+                            '32': 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
+                            '48': 'https://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png',
+                            '96': 'https://s.ytimg.com/yts/img/favicon_96-vfldSA3ca.png',
+                            '144': 'https://s.ytimg.com/yts/img/favicon_144-vflWmzoXw.png',
+                            any: 'https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico',
+                            smallest: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png'
+                        },
                         thumbnail: {
                             url: 'https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg',
                             width: 480,
@@ -444,15 +468,7 @@ describe('Metaphor', () => {
                             height: 360
                         },
                         twitter: { site_username: '@youtube' },
-                        icon: {
-                            '32': 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
-                            '48': 'https://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png',
-                            '96': 'https://s.ytimg.com/yts/img/favicon_96-vfldSA3ca.png',
-                            '144': 'https://s.ytimg.com/yts/img/favicon_144-vflWmzoXw.png',
-                            smallest: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png'
-                        },
-                        preview: '<html><head><title>Cheese Shop Sketch - Monty Python\'s Flying Circus</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png"/><div class="metaphor-embed-header-site">YouTube</div><a class ="metaphor-embed-header-link" href="https://www.youtube.com/watch?v=cWDdd5KKhts"><div class="metaphor-embed-header-title">Cheese Shop Sketch - Monty Python\'s Flying Circus</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...</div><img class="metaphor-embed-body-image" src="https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg"/></div></div></body></html>',
-                        sources: ['ogp', 'resource', 'oembed', 'twitter']
+                        preview: '<html><head><title>Cheese Shop Sketch - Monty Python\'s Flying Circus</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png"/><div class="metaphor-embed-header-site">YouTube</div><a class ="metaphor-embed-header-link" href="https://www.youtube.com/watch?v=cWDdd5KKhts"><div class="metaphor-embed-header-title">Cheese Shop Sketch - Monty Python\'s Flying Circus</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...</div><img class="metaphor-embed-body-image" src="https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg"/></div></div></body></html>'
                     });
 
                     done();
@@ -740,14 +756,18 @@ describe('Metaphor', () => {
                         },
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
+                        icon: {
+                            any: 'https://abs.twimg.com/favicons/favicon.ico',
+                            smallest: 'https://abs.twimg.com/favicons/favicon.ico'
+                        },
                         embed: {
                             url: 'https://twitter.com/sideway/status/626158822705401856',
                             html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
                             width: 550,
                             type: 'rich'
                         },
-                        sources: ['ogp', 'oembed'],
-                        preview: '<html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">Twitter</div><a class ="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div></div></div></body></html>'
+                        sources: ['ogp', 'resource', 'oembed'],
+                        preview: '<html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class ="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div></div></div></body></html>'
                     });
 
                     done();
@@ -788,14 +808,18 @@ describe('Metaphor', () => {
                         },
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
+                        icon: {
+                            any: 'https://abs.twimg.com/favicons/favicon.ico',
+                            smallest: 'https://abs.twimg.com/favicons/favicon.ico'
+                        },
                         embed: {
                             url: 'https://twitter.com/sideway/status/626158822705401856',
                             html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
                             width: 550,
                             type: 'rich'
                         },
-                        sources: ['ogp', 'oembed'],
-                        preview: '<html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-site">Twitter</div><a class ="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div></div></div></body></html>'
+                        sources: ['ogp', 'resource', 'oembed'],
+                        preview: '<html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class=\"metaphor-embed-header-icon\" src=\"https://abs.twimg.com/favicons/favicon.ico\"/><div class="metaphor-embed-header-site">Twitter</div><a class ="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div></div></div></body></html>'
                     });
 
                     done();
