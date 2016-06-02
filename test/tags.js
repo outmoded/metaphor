@@ -120,7 +120,7 @@ describe('Metaphor', () => {
                 expect(description).to.equal({
                     type: 'website',
                     url: 'http://www.imdb.com/title/tt0117500/',
-                    icon: { any: 'http://example.com', smallest: 'http://example.com' },
+                    icon: { any: 'http://example.com/', smallest: 'http://example.com/' },
                     sources: ['resource']
                 });
 
