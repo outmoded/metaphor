@@ -13,7 +13,7 @@
         "embed"
     ],
     "engines": {
-        "node": ">=6.x.x"
+        "node": ">=4.x.x"
     },
     "dependencies": {
         "content": "3.x.x",
