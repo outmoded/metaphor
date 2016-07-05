@@ -192,6 +192,30 @@ describe('Open Graph', () => {
             });
         });
 
+        it('ignores invalid url', (done) => {
+
+            const html = `<html>
+            <head>
+                <meta property="og:title" content="The Rock" />
+                <meta property="og:url" content="http//www.imdb.com/title/tt0117500/" />
+                <meta property="og:image" content="http://ia.media-imdb.com/images/rock1.jpg" />
+            </head>
+            </html>`;
+
+            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
+
+                expect(description).to.equal({
+                    title: 'The Rock',
+                    type: 'website',
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    image: { url: 'http://ia.media-imdb.com/images/rock1.jpg' },
+                    sources: ['ogp']
+                });
+
+                done();
+            });
+        });
+
         it('handles missing image', (done) => {
 
             const html = `<html>
