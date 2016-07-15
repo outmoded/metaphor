@@ -128,6 +128,7 @@ A reusable engine used to set global processing settings for each description wh
       is only enforced when creating a `preview` (ignored when `preview` is disabled). When set, an HTTP
       HEAD request is made to each image URL to obtain its size. Defaults to `false`.
     - `css` - if set to a URL, it is used as a style sheet link in the `preview`. Defaults to `false` (no link).
+    - `script` - if set to a URL, it is used as a script link in the `preview`. Defaults to `false` (no link).
 
 ### `engine.describe(url, callback)`
 
