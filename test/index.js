@@ -234,6 +234,28 @@ describe('Metaphor', () => {
                 });
             });
 
+            it('describes a private tweet', (done) => {
+
+                const engine = new Metaphor.Engine();
+                engine.describe('https://twitter.com/halfbee/status/683408044386959360', (description) => {
+
+                    expect(description).to.equal({
+                        type: 'website',
+                        sources: ['resource'],
+                        url: 'https://twitter.com/halfbee/status/683408044386959360',
+                        description: 'The latest Tweets and replies from Half Bee (@halfbee). The unpublishable brain farts of @eranhammer',
+                        icon: {
+                            any: 'https://abs.twimg.com/favicons/favicon.ico',
+                            smallest: 'https://abs.twimg.com/favicons/favicon.ico'
+                        },
+                        site_name: 'Twitter',
+                        preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/halfbee/status/683408044386959360" target="_blank"><div class="metaphor-embed-header-title">https://twitter.com/halfbee/status/683408044386959360</div></a></div><div class=\'metaphor-embed-body has-description no-image\'><div class="metaphor-embed-body-description">The latest Tweets and replies from Half Bee (@halfbee). The unpublishable brain farts of @eranhammer</div><div class="metaphor-embed-body-image-missing"></div></div></div></body></html>'
+                    });
+
+                    done();
+                });
+            });
+
             it('describes a flickr photo', (done) => {
 
                 const engine = new Metaphor.Engine({ maxWidth: 400, maxHeight: 200 });
