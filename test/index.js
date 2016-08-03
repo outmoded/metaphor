@@ -323,7 +323,7 @@ describe('Metaphor', () => {
                             type: 'photo',
                             size: 17014
                         },
-                        preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-icon-missing"></div><div class="metaphor-embed-header-site">Image</div><a class="metaphor-embed-header-link" href="https://www.sideway.com/sideway.png" target="_blank"><div class="metaphor-embed-header-title">https://www.sideway.com/sideway.png</div></a></div><div class=\'metaphor-embed-body no-description has-image\'><div class="metaphor-embed-body-description"></div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://www.sideway.com/sideway.png"/></div></div></div></body></html>',
+                        preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed metaphor-embed-image-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-icon-missing"></div><a class="metaphor-embed-header-link" href="https://www.sideway.com/sideway.png" target="_blank"><div class="metaphor-embed-header-title">https://www.sideway.com/sideway.png</div></a></div><div class=\'metaphor-embed-body no-description has-image\'><div class="metaphor-embed-body-description"></div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://www.sideway.com/sideway.png"/></div></div></div></body></html>',
                         sources: ['resource']
                     });
 
@@ -345,7 +345,7 @@ describe('Metaphor', () => {
                             type: 'photo',
                             size: 17014
                         },
-                        preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-icon-missing"></div><div class="metaphor-embed-header-site">Image</div><a class="metaphor-embed-header-link" href="https://www.sideway.com/sideway.png" target="_blank"><div class="metaphor-embed-header-title">https://www.sideway.com/sideway.png</div></a></div><div class=\'metaphor-embed-body no-description no-image\'><div class="metaphor-embed-body-description"></div><div class="metaphor-embed-body-image-missing"></div></div></div></body></html>',
+                        preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed metaphor-embed-image-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-icon-missing"></div><a class="metaphor-embed-header-link" href="https://www.sideway.com/sideway.png" target="_blank"><div class="metaphor-embed-header-title">https://www.sideway.com/sideway.png</div></a></div><div class=\'metaphor-embed-body no-description no-image\'><div class="metaphor-embed-body-description"></div><div class="metaphor-embed-body-image-missing"></div></div></div></body></html>',
                         sources: ['resource']
                     });
 
@@ -367,7 +367,7 @@ describe('Metaphor', () => {
                             type: 'photo',
                             size: 17014
                         },
-                        preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-icon-missing"></div><div class="metaphor-embed-header-site">Image</div><a class="metaphor-embed-header-link" href="https://www.sideway.com/sideway.png" target="_blank"><div class="metaphor-embed-header-title">https://www.sideway.com/sideway.png</div></a></div><div class=\'metaphor-embed-body no-description has-image\'><div class="metaphor-embed-body-description"></div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://www.sideway.com/sideway.png"/></div></div></div></body></html>',
+                        preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed metaphor-embed-image-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-icon-missing"></div><a class="metaphor-embed-header-link" href="https://www.sideway.com/sideway.png" target="_blank"><div class="metaphor-embed-header-title">https://www.sideway.com/sideway.png</div></a></div><div class=\'metaphor-embed-body no-description has-image\'><div class="metaphor-embed-body-description"></div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://www.sideway.com/sideway.png"/></div></div></div></body></html>',
                         sources: ['resource']
                     });
 
