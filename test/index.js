@@ -331,6 +331,63 @@ describe('Metaphor', () => {
                 });
             });
 
+            it('describes an image (with summary)', (done) => {
+
+                const engine = new Metaphor.Engine({ summary: true });
+                engine.describe('https://www.sideway.com/sideway.png', (description) => {
+
+                    expect(description).to.equal({
+                        url: 'https://www.sideway.com/sideway.png',
+                        type: 'website',
+                        site_name: 'Image',
+                        embed: {
+                            url: 'https://www.sideway.com/sideway.png',
+                            type: 'photo',
+                            size: 17014
+                        },
+                        summary: {
+                            url: 'https://www.sideway.com/sideway.png',
+                            title: 'https://www.sideway.com/sideway.png',
+                            description: undefined,
+                            icon: undefined,
+                            image: 'https://www.sideway.com/sideway.png'
+                        },
+                        preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed metaphor-embed-image-embed\'><div class=\'metaphor-embed-header\'><div class="metaphor-embed-header-icon-missing"></div><a class="metaphor-embed-header-link" href="https://www.sideway.com/sideway.png" target="_blank"><div class="metaphor-embed-header-title">https://www.sideway.com/sideway.png</div></a></div><div class=\'metaphor-embed-body no-description has-image\'><div class="metaphor-embed-body-description"></div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://www.sideway.com/sideway.png"/></div></div></div></body></html>',
+                        sources: ['resource']
+                    });
+
+                    done();
+                });
+            });
+
+            it('describes an image (with summary without preview)', (done) => {
+
+                const engine = new Metaphor.Engine({ summary: true, preview: false });
+                engine.describe('https://www.sideway.com/sideway.png', (description) => {
+
+                    expect(description).to.equal({
+                        url: 'https://www.sideway.com/sideway.png',
+                        type: 'website',
+                        site_name: 'Image',
+                        embed: {
+                            url: 'https://www.sideway.com/sideway.png',
+                            type: 'photo',
+                            size: 17014
+                        },
+                        summary: {
+                            url: 'https://www.sideway.com/sideway.png',
+                            title: 'https://www.sideway.com/sideway.png',
+                            description: undefined,
+                            icon: undefined,
+                            image: 'https://www.sideway.com/sideway.png'
+                        },
+                        sources: ['resource']
+                    });
+
+                    done();
+                });
+            });
+
             it('describes an image (max size)', (done) => {
 
                 const engine = new Metaphor.Engine({ maxSize: 1024 });
@@ -637,9 +694,9 @@ describe('Metaphor', () => {
             it('handles invalid domain', (done) => {
 
                 const engine = new Metaphor.Engine({ preview: false });
-                engine.describe('http://no_such_domain/1', (description) => {
+                engine.describe('http://0/1', (description) => {
 
-                    expect(description).to.equal({ type: 'website', url: 'http://no_such_domain/1', site_name: 'no_such_domain' });
+                    expect(description).to.equal({ type: 'website', url: 'http://0/1', site_name: '0' });
                     done();
                 });
             });
