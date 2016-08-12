@@ -124,6 +124,10 @@ A reusable engine used to set global processing settings for each description wh
             - `options` - the engine settings.
             - `callback` - the callback method using the signature `function(preview)` where:
                 - `preview` - the HTML preview string or `null` to skip setting a preview.
+	- `summary` - if `true`, a `summary` object is include with the description which contains the same
+	  data provided by the `preview`. Defaults to `false`.
+	- `tweet` - if `true`, tweets are parsed to include specific information required to show a proper
+	  embeded tweet without the use of the Twitter scripts. Defaults to `false`.
     - `maxSize` - the maximum image size in bytes allowed to be included in an image preview. The limit
       is only enforced when creating a `preview` (ignored when `preview` is disabled). When set, an HTTP
       HEAD request is made to each image URL to obtain its size. Defaults to `false`.

@@ -1,7 +1,7 @@
 {
     "name": "metaphor",
     "description": "Open Graph, Twitter Card, and oEmbed Metadata Collector",
-    "version": "3.7.0",
+    "version": "3.8.0",
     "repository": "git://github.com/hueniverse/metaphor",
     "main": "lib/index.js",
     "keywords": [
@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "content": "3.x.x",
+        "entities": "1.x.x",
         "hoek": "4.x.x",
         "htmlparser2": "3.x.x",
         "items": "2.x.x",

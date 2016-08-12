@@ -30,7 +30,7 @@ describe('Metaphor', () => {
 
             it('describes a NY Times article', (done) => {
 
-                const engine = new Metaphor.Engine({ css: '/embed.css', script: '/script.js', providers: Providers, redirect: 'https://example.com/redirect=' });
+                const engine = new Metaphor.Engine({ css: '/embed.css', script: '/script.js', providers: Providers, redirect: 'https://example.com/redirect=', tweet: true });
                 const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
                 engine.describe(resource, (description) => {
 
@@ -165,6 +165,7 @@ describe('Metaphor', () => {
                         url: 'https://twitter.com/sideway/status/626158822705401856',
                         title: 'Sideway on Twitter',
                         image: { url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg' },
+                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
                         sources: ['ogp', 'resource', 'oembed'],
@@ -203,7 +204,7 @@ describe('Metaphor', () => {
 
             it('describes a tweet', (done) => {
 
-                const engine = new Metaphor.Engine();
+                const engine = new Metaphor.Engine({ tweet: true });
                 engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
 
                     expect(description).to.equal({
@@ -216,6 +217,7 @@ describe('Metaphor', () => {
                         },
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
+                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
                         sources: ['ogp', 'resource', 'oembed'],
                         icon: {
                             any: 'https://abs.twimg.com/favicons/favicon.ico',
@@ -227,7 +229,15 @@ describe('Metaphor', () => {
                             url: 'https://twitter.com/sideway/status/626158822705401856',
                             html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
                         },
-                        preview: '<!DOCTYPE html><html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856" target="_blank"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg"/></div></div></div></body></html>'
+                        preview: '<!DOCTYPE html><html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856" target="_blank"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg"/></div></div></div></body></html>',
+                        tweet: {
+                            name: 'Sideway',
+                            username: 'sideway',
+                            avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
+                            content: 'First steps https://sideway.com',
+                            date: 'July 28, 2015',
+                            links: { 'https://sideway.com': 'https://t.co/XvSn7XSI2G' }
+                        }
                     });
 
                     done();
@@ -249,6 +259,7 @@ describe('Metaphor', () => {
                             smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                         },
                         site_name: 'Twitter',
+                        avatar: 'https://pbs.twimg.com/profile_images/680600062896902145/jVPdsOot_400x400.png',
                         preview: '<!DOCTYPE html><html><head></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/halfbee/status/683408044386959360" target="_blank"><div class="metaphor-embed-header-title">https://twitter.com/halfbee/status/683408044386959360</div></a></div><div class=\'metaphor-embed-body has-description no-image\'><div class="metaphor-embed-body-description">The latest Tweets and replies from Half Bee (@halfbee). The unpublishable brain farts of @eranhammer</div><div class="metaphor-embed-body-image-missing"></div></div></div></body></html>'
                     });
 
@@ -841,6 +852,7 @@ describe('Metaphor', () => {
                         },
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
+                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
                         icon: {
                             any: 'https://abs.twimg.com/favicons/favicon.ico',
                             smallest: 'https://abs.twimg.com/favicons/favicon.ico'
@@ -893,6 +905,7 @@ describe('Metaphor', () => {
                         },
                         description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
                         site_name: 'Twitter',
+                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
                         icon: {
                             any: 'https://abs.twimg.com/favicons/favicon.ico',
                             smallest: 'https://abs.twimg.com/favicons/favicon.ico'
