@@ -278,27 +278,32 @@ describe('Metaphor', () => {
                         title: '300/365 "The Lonely Gold Rush"',
                         description: '27.07.15  So this is it, day 300. The real count down begins now I guess.  Also found a pickaxe at my house moment before I even shot this. I seem to have strange and worrisome objects at my house. The first one I was looking for was a spear. And I\'m still in need of another deadly prop for this series. A lot has been said with very few words. Don\'t worry I\'m not a murderer. HOnestly I was searching for the spear first as I had a stronger concept, well it has a stronger meaning to it for me, bur alas I couldn\'t find it in time. I have seince then loaceted it after I\'ve shot this. But time was of the essence.   In other news I\'m planning a new photographic series and have been doing some research and sketching. On the downside I don\'t think I\'ll be shooting any of them until this project is over.',
                         type: 'photo',
-                        custom_type: 'flickr_photos:photo',
                         url: 'https://www.flickr.com/photos/kent-macdonald/19455364653/',
                         image: {
                             url: 'https://c1.staticflickr.com/1/259/19455364653_201bdfd31b_b.jpg',
-                            size: 278195,
                             width: 1024,
-                            height: 576
+                            height: 576,
+                            size: 278195
+                        },
+                        custom_type: 'flickr_photos:photo',
+                        sources: ['ogp', 'resource', 'oembed', 'twitter'],
+                        icon: {
+                            any: 'https://s.yimg.com/pw/favicon.ico',
+                            smallest: 'https://s.yimg.com/pw/favicon.ico'
                         },
                         thumbnail: {
                             url: 'https://farm1.staticflickr.com/259/19455364653_201bdfd31b_q.jpg',
-                            size: 15476,
                             width: 150,
-                            height: 150
+                            height: 150,
+                            size: 15476
                         },
                         embed: {
                             type: 'photo',
-                            size: 21677,
                             height: 180,
                             width: 320,
                             url: 'https://farm1.staticflickr.com/259/19455364653_201bdfd31b_n.jpg',
-                            html: '<a data-flickr-embed="true" href="https://www.flickr.com/photos/kent-macdonald/19455364653/" title="300/365 &quot;The Lonely Gold Rush&quot; by achillesheels, on Flickr"><img src="https://farm1.staticflickr.com/259/19455364653_201bdfd31b_n.jpg" width="320" height="180" alt="300/365 &quot;The Lonely Gold Rush&quot;"></a><script async src="https://embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>'
+                            html: '<a data-flickr-embed="true" href="https://www.flickr.com/photos/kent-macdonald/19455364653/" title="300/365 &quot;The Lonely Gold Rush&quot; by achillesheels, on Flickr"><img src="https://farm1.staticflickr.com/259/19455364653_201bdfd31b_n.jpg" width="320" height="180" alt="300/365 &quot;The Lonely Gold Rush&quot;"></a><script async src="https://embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>',
+                            size: 21677
                         },
                         app: {
                             iphone: {
@@ -308,12 +313,7 @@ describe('Metaphor', () => {
                             }
                         },
                         twitter: { site_username: '@flickr' },
-                        icon: {
-                            any: 'https://s.yimg.com/pw/images/icon_black_white.svg',
-                            smallest: 'https://s.yimg.com/pw/images/icon_black_white.svg'
-                        },
-                        preview: '<!DOCTYPE html><html><head><title>300/365 "The Lonely Gold Rush"</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://s.yimg.com/pw/images/icon_black_white.svg"/><div class="metaphor-embed-header-site">Flickr</div><a class="metaphor-embed-header-link" href="https://www.flickr.com/photos/kent-macdonald/19455364653/" target="_blank"><div class="metaphor-embed-header-title">300/365 "The Lonely Gold Rush"</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">27.07.15  So this is it, day 300. The real count down begins now I guess.  Also found a pickaxe at my house moment before I even shot this. I seem to have strange and worrisome objects at my house. The first one I was looking for was a spear. And I\'m still in need of another deadly prop for this series. A lot has been said with very few words. Don\'t worry I\'m not a murderer. HOnestly I was searching for the spear first as I had a stronger concept, well it has a stronger meaning to it for me, bur alas I couldn\'t find it in time. I have seince then loaceted it after I\'ve shot this. But time was of the essence.   In other news I\'m planning a new photographic series and have been doing some research and sketching. On the downside I don\'t think I\'ll be shooting any of them until this project is over.</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://farm1.staticflickr.com/259/19455364653_201bdfd31b_q.jpg"/></div></div></div></body></html>',
-                        sources: ['ogp', 'resource', 'oembed', 'twitter']
+                        preview: '<!DOCTYPE html><html><head><title>300/365 "The Lonely Gold Rush"</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://s.yimg.com/pw/favicon.ico"/><div class="metaphor-embed-header-site">Flickr</div><a class="metaphor-embed-header-link" href="https://www.flickr.com/photos/kent-macdonald/19455364653/" target="_blank"><div class="metaphor-embed-header-title">300/365 "The Lonely Gold Rush"</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">27.07.15  So this is it, day 300. The real count down begins now I guess.  Also found a pickaxe at my house moment before I even shot this. I seem to have strange and worrisome objects at my house. The first one I was looking for was a spear. And I\'m still in need of another deadly prop for this series. A lot has been said with very few words. Don\'t worry I\'m not a murderer. HOnestly I was searching for the spear first as I had a stronger concept, well it has a stronger meaning to it for me, bur alas I couldn\'t find it in time. I have seince then loaceted it after I\'ve shot this. But time was of the essence.   In other news I\'m planning a new photographic series and have been doing some research and sketching. On the downside I don\'t think I\'ll be shooting any of them until this project is over.</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://farm1.staticflickr.com/259/19455364653_201bdfd31b_q.jpg"/></div></div></div></body></html>'
                     });
 
                     done();
@@ -455,7 +455,7 @@ describe('Metaphor', () => {
                             url: 'http://www.wired.com/wp-content/uploads/2016/05/android-1200x630-e1464301027666.jpg',
                             width: 1200,
                             height: 630,
-                            size: 19189
+                            size: 233720
                         },
                         description: 'The verdict could have major implications for the future of software developments.',
                         locale: { primary: 'en_US' },
