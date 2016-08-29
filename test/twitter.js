@@ -163,7 +163,7 @@ describe('Twitter', () => {
                     title: 'Sideway on Twitter',
                     image: {
                         url: 'https://pbs.twimg.com/media/CLCQ3OGUkAAjr7f.jpg:large',
-                        size: 157251
+                        size: 148244
                     },
                     description: '\u201cThe important bits of our authentication page.\u201d',
                     site_name: 'Twitter',
