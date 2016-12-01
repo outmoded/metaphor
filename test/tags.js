@@ -127,5 +127,54 @@ describe('Metaphor', () => {
                 done();
             });
         });
+
+        it('sets any icon link sizes attribute', (done) => {
+
+            const html = `<html prefix="og: http://ogp.me/ns#">
+            <head>
+                <title>The Rock (1996) </title>
+                <link rel="icon" href="http://example.com" sizes="any" />
+            </head>
+            <body>
+            </body>
+            </html>`;
+
+            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
+
+                expect(description).to.equal({
+                    type: 'website',
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    icon: { any: 'http://example.com/', smallest: 'http://example.com/' },
+                    sources: ['resource']
+                });
+
+                done();
+            });
+        });
+
+        it('ignores second icon link with same size', (done) => {
+
+            const html = `<html prefix="og: http://ogp.me/ns#">
+            <head>
+                <title>The Rock (1996) </title>
+                <link rel="icon" href="http://example.com" sizes="any" />
+                <link rel="icon" href="http://example.com2" sizes="any" />
+            </head>
+            <body>
+            </body>
+            </html>`;
+
+            Metaphor.parse(html, 'http://www.imdb.com/title/tt0117500/', {}, (description) => {
+
+                expect(description).to.equal({
+                    type: 'website',
+                    url: 'http://www.imdb.com/title/tt0117500/',
+                    icon: { any: 'http://example.com/', smallest: 'http://example.com/' },
+                    sources: ['resource']
+                });
+
+                done();
+            });
+        });
     });
 });

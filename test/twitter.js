@@ -163,7 +163,7 @@ describe('Twitter', () => {
                     title: 'Sideway on Twitter',
                     image: {
                         url: 'https://pbs.twimg.com/media/CLCQ3OGUkAAjr7f.jpg:large',
-                        size: 148244
+                        size: description.image.size
                     },
                     description: '\u201cThe important bits of our authentication page.\u201d',
                     site_name: 'Twitter',
@@ -206,7 +206,7 @@ describe('Twitter', () => {
                     title: 'Lagavulin on Twitter',
                     image: {
                         url: 'https://pbs.twimg.com/profile_images/697804272373780480/sVOTNu1I_400x400.jpg',
-                        size: 18530
+                        size: description.image.size
                     },
                     description: '\u201cThe Islay Jazz festival will take place from the 9th - 11th September this year!\n\nTickets: https://t.co/XmgYyXnWrg #Lagavulin200 #LagaJazz\u201d',
                     site_name: 'Twitter',
