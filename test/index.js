@@ -985,5 +985,38 @@ describe('Metaphor', () => {
                 done();
             });
         });
+
+        it('uses input link url if oembed is invalid', { parallel: false }, (done) => {
+
+            const html = `<html>
+            <head>
+                <link rel="alternate" type="application/json+oembed" href="https://publish.twitter.com/oembed?url=https://twitter.com/dalmaer/status/726624422237364226" title="Dion Almaer on Twitter: &quot;Maybe agile doesn&#39;t scale and that&#39;s ok https://t.co/DwrWCnCU38&quot;">
+            </head>
+            </html>`;
+
+            const oembed = {
+                type: 'link',
+                version: '1.0',
+                url: 'https//twitter.com/dalmaer/status/726624422237364226',
+                provider_name: 'Twitter'
+            };
+
+            const orig = Wreck.get;
+            Wreck.get = (url, options, next) => {
+
+                Wreck.get = orig;
+                next(null, { statusCode: 200 }, JSON.stringify(oembed));
+            };
+
+            Metaphor.parse(html, 'https://twitter.com/dalmaer/status/726624422237364226', {}, (description) => {
+
+                expect(description).to.equal({
+                    url: 'https://twitter.com/dalmaer/status/726624422237364226',
+                    type: 'website'
+                });
+
+                done();
+            });
+        });
     });
 });
