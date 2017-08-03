@@ -155,39 +155,39 @@ describe('Twitter', () => {
         it('describes a tweet with image', (done) => {
 
             const engine = new Metaphor.Engine({ tweet: true });
-            engine.describe('https://twitter.com/sideway/status/626159627105730560', (description) => {
+            engine.describe('https://twitter.com/ardnahoe/status/892833709438754816', (description) => {
 
                 expect(description).to.equal({
                     type: 'article',
-                    url: 'https://twitter.com/sideway/status/626159627105730560',
-                    title: 'Sideway on Twitter',
+                    url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                    title: 'Ardnahoe Distillery on Twitter',
                     image: {
-                        url: 'https://pbs.twimg.com/media/CLCQ3OGUkAAjr7f.jpg:large',
-                        size: description.image.size
+                        url: 'https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large',
+                        size: 273453
                     },
-                    description: '\u201cThe important bits of our authentication page.\u201d',
+                    description: '\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d',
                     site_name: 'Twitter',
                     sources: ['ogp', 'resource', 'oembed'],
                     icon: {
                         any: 'https://abs.twimg.com/favicons/favicon.ico',
                         smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                     },
-                    avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
+                    avatar: 'https://pbs.twimg.com/profile_images/836605178744832001/iNcUgrE-_400x400.jpg',
                     embed: {
                         type: 'rich',
                         width: 550,
-                        url: 'https://twitter.com/sideway/status/626159627105730560',
-                        html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The important bits of our authentication page. <a href="http://t.co/ERUMQ6iAxm">pic.twitter.com/ERUMQ6iAxm</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626159627105730560">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
+                        url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                        html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A misty but peaceful evening at Loch Ardnahoe tonight. <a href="https://twitter.com/hashtag/Islay?src=hash">#Islay</a> <a href="https://t.co/HXc38uYxa0">pic.twitter.com/HXc38uYxa0</a></p>&mdash; Ardnahoe Distillery (@ardnahoe) <a href="https://twitter.com/ardnahoe/status/892833709438754816">August 2, 2017</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
                     },
-                    preview: '<!DOCTYPE html><html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626159627105730560" target="_blank"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">\u201cThe important bits of our authentication page.\u201d</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/media/CLCQ3OGUkAAjr7f.jpg:large"/></div></div></div></body></html>',
+                    preview: '<!DOCTYPE html><html><head><title>Ardnahoe Distillery on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/ardnahoe/status/892833709438754816" target="_blank"><div class="metaphor-embed-header-title">Ardnahoe Distillery on Twitter</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large"/></div></div></div></body></html>',
                     tweet: {
-                        name: 'Sideway',
-                        username: 'sideway',
-                        content: 'The important bits of our authentication page. pic.twitter.com/ERUMQ6iAxm',
-                        date: 'July 28, 2015',
+                        name: 'Ardnahoe Distillery',
+                        username: 'ardnahoe',
+                        content: 'A misty but peaceful evening at Loch Ardnahoe tonight. #Islay pic.twitter.com/HXc38uYxa0',
+                        date: 'August 2, 2017',
                         links: {},
-                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
-                        image: 'https://pbs.twimg.com/media/CLCQ3OGUkAAjr7f.jpg:large'
+                        avatar: 'https://pbs.twimg.com/profile_images/836605178744832001/iNcUgrE-_400x400.jpg',
+                        image: 'https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large'
                     }
                 });
 
@@ -205,7 +205,7 @@ describe('Twitter', () => {
                     url: 'https://twitter.com/LagavulinWhisky/status/769958225571557376',
                     title: 'Lagavulin on Twitter',
                     image: {
-                        url: 'https://pbs.twimg.com/profile_images/697804272373780480/sVOTNu1I_400x400.jpg',
+                        url: 'https://pbs.twimg.com/profile_images/855018870419189760/MWCzc21G_400x400.jpg',
                         size: description.image.size
                     },
                     description: '\u201cThe Islay Jazz festival will take place from the 9th - 11th September this year!\n\nTickets: https://t.co/XmgYyXnWrg #Lagavulin200 #LagaJazz\u201d',
@@ -215,21 +215,21 @@ describe('Twitter', () => {
                         any: 'https://abs.twimg.com/favicons/favicon.ico',
                         smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                     },
-                    avatar: 'https://pbs.twimg.com/profile_images/697804272373780480/sVOTNu1I_400x400.jpg',
+                    avatar: 'https://pbs.twimg.com/profile_images/855018870419189760/MWCzc21G_400x400.jpg',
                     embed: {
                         type: 'rich',
                         width: 550,
                         url: 'https://twitter.com/LagavulinWhisky/status/769958225571557376',
                         html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The Islay Jazz festival will take place from the 9th - 11th September this year!<br><br>Tickets: <a href="https://t.co/XmgYyXnWrg">https://t.co/XmgYyXnWrg</a> <a href="https://twitter.com/hashtag/Lagavulin200?src=hash">#Lagavulin200</a> <a href="https://twitter.com/hashtag/LagaJazz?src=hash">#LagaJazz</a></p>&mdash; Lagavulin (@LagavulinWhisky) <a href="https://twitter.com/LagavulinWhisky/status/769958225571557376">August 28, 2016</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
                     },
-                    preview: '<!DOCTYPE html><html><head><title>Lagavulin on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/LagavulinWhisky/status/769958225571557376" target="_blank"><div class="metaphor-embed-header-title">Lagavulin on Twitter</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">\u201cThe Islay Jazz festival will take place from the 9th - 11th September this year!Tickets: https://t.co/XmgYyXnWrg #Lagavulin200 #LagaJazz\u201d</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/profile_images/697804272373780480/sVOTNu1I_400x400.jpg"/></div></div></div></body></html>',
+                    preview: '<!DOCTYPE html><html><head><title>Lagavulin on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/LagavulinWhisky/status/769958225571557376" target="_blank"><div class="metaphor-embed-header-title">Lagavulin on Twitter</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">\u201cThe Islay Jazz festival will take place from the 9th - 11th September this year!Tickets: https://t.co/XmgYyXnWrg #Lagavulin200 #LagaJazz\u201d</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/profile_images/855018870419189760/MWCzc21G_400x400.jpg"/></div></div></div></body></html>',
                     tweet: {
                         name: 'Lagavulin',
                         username: 'LagavulinWhisky',
                         content: 'The Islay Jazz festival will take place from the 9th - 11th September this year!\n\nTickets: http://www.islayjazzfestival.co.uk/programme.html #Lagavulin200 #LagaJazz',
                         date: 'August 28, 2016',
                         links: { 'http://www.islayjazzfestival.co.uk/programme.html': 'https://t.co/XmgYyXnWrg' },
-                        avatar: 'https://pbs.twimg.com/profile_images/697804272373780480/sVOTNu1I_400x400.jpg'
+                        avatar: 'https://pbs.twimg.com/profile_images/855018870419189760/MWCzc21G_400x400.jpg'
                     }
                 });
 

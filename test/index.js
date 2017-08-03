@@ -31,11 +31,11 @@ describe('Metaphor', () => {
             it('describes a NY Times article', (done) => {
 
                 const engine = new Metaphor.Engine({ css: '/embed.css', script: '/script.js', providers: Providers, redirect: 'https://example.com/redirect=', tweet: true });
-                const resource = 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=http%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
+                const resource = 'https://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html?rref=collection%252Fnewseventcollection%252FPresidential+Election+2016&contentId=&mediaId=&referrer=https%3A%2F%2Fwww.nytimes.com%2F%3Faction%3Dclick%26contentCollection%3DPolitics%26region%3DTopBar%26module%3DHomePage-Button%26pgtype%3Darticle%26WT.z_jog%3D1%26hF%3Dt%26vS%3Dundefined&priority=true&action=click&contentCollection=Politics&module=Collection&region=Marginalia&src=me&version=newsevent&pgtype=article';
                 engine.describe(resource, (description) => {
 
                     expect(description).to.equal({
-                        url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
+                        url: 'https://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
                         type: 'article',
                         title: 'Rise of Donald Trump Tracks Growing Debate Over Global Fascism',
                         description: 'Mr. Trump\u2019s campaign has engendered impassioned discussion about the nature of his appeal and warnings from critics on the left and the right.',
@@ -60,8 +60,8 @@ describe('Metaphor', () => {
                             type: 'rich',
                             height: 550,
                             width: 300,
-                            url: 'http://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
-                            html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
+                            url: 'https://www.nytimes.com/2016/05/29/world/europe/rise-of-donald-trump-tracks-growing-debate-over-global-fascism.html',
+                            html: '<iframe src="https://www.nytimes.com/svc/oembed/html/?url=https%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" scrolling="no" frameborder="0" allowtransparency="true" style="border:none;max-width:500px;min-width:300px;min-height:550px;display:block;width:100%;"></iframe>'
                         },
                         app: {
                             googleplay: {
@@ -71,7 +71,7 @@ describe('Metaphor', () => {
                             }
                         },
                         twitter: { site_username: '@nytimes', creator_username: 'peterbakernyt' },
-                        preview: '<!DOCTYPE html><html><head><title>Rise of Donald Trump Tracks Growing Debate Over Global Fascism</title><link rel="stylesheet" href="/embed.css"><script type="text/javascript" charset="utf-8" src="/script.js"></script></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://static01.nyt.com/favicon.ico"/><div class="metaphor-embed-header-site">The New York Times</div><a class="metaphor-embed-header-link" href="https://example.com/redirect=http%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" target="_blank"><div class="metaphor-embed-header-title">Rise of Donald Trump Tracks Growing Debate Over Global Fascism</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">Mr. Trump\u2019s campaign has engendered impassioned discussion about the nature of his appeal and warnings from critics on the left and the right.</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg"/></div></div></div></body></html>'
+                        preview: '<!DOCTYPE html><html><head><title>Rise of Donald Trump Tracks Growing Debate Over Global Fascism</title><link rel="stylesheet" href="/embed.css"><script type="text/javascript" charset="utf-8" src="/script.js"></script></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://static01.nyt.com/favicon.ico"/><div class="metaphor-embed-header-site">The New York Times</div><a class="metaphor-embed-header-link" href="https://example.com/redirect=https%3A%2F%2Fwww.nytimes.com%2F2016%2F05%2F29%2Fworld%2Feurope%2Frise-of-donald-trump-tracks-growing-debate-over-global-fascism.html" target="_blank"><div class="metaphor-embed-header-title">Rise of Donald Trump Tracks Growing Debate Over Global Fascism</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">Mr. Trump\u2019s campaign has engendered impassioned discussion about the nature of his appeal and warnings from critics on the left and the right.</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://static01.nyt.com/images/2016/05/29/world/JP-FASCISM1/JP-FASCISM1-mediumThreeByTwo440.jpg"/></div></div></div></body></html>'
                     });
 
                     done();
@@ -94,7 +94,7 @@ describe('Metaphor', () => {
                         url: 'http://maaira.deviantart.com/art/Who-are-you-612604046',
                         description: 'Nova meets cows.',
                         type: 'website',
-                        sources: ['ogp', 'oembed', 'resource', 'twitter'],
+                        sources: ['ogp', 'resource', 'oembed', 'twitter'],
                         site_name: 'DeviantArt',
                         icon: {
                             '48': 'http://st.deviantart.net/minish/touch-icons/android-48.png',
@@ -138,7 +138,7 @@ describe('Metaphor', () => {
                         url: 'http://maaira.deviantart.com/art/Who-are-you-612604046',
                         description: 'Nova meets cows.',
                         type: 'website',
-                        site_name: 'Deviantart',
+                        site_name: 'DeviantArt',
                         sources: ['ogp', 'resource', 'twitter'],
                         icon: {
                             '48': 'http://st.deviantart.net/minish/touch-icons/android-48.png',
@@ -158,26 +158,26 @@ describe('Metaphor', () => {
             it('describes a whitelisted resource', (done) => {
 
                 const engine = new Metaphor.Engine({ whitelist: ['https://twitter.com/*'], preview: false });
-                engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
+                engine.describe('https://twitter.com/ardnahoe/status/892833709438754816', (description) => {
 
                     expect(description).to.equal({
                         type: 'article',
-                        url: 'https://twitter.com/sideway/status/626158822705401856',
-                        title: 'Sideway on Twitter',
-                        image: { url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg' },
-                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
-                        description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                        url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                        title: 'Ardnahoe Distillery on Twitter',
+                        image: { url: 'https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large' },
+                        description: '\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d',
                         site_name: 'Twitter',
                         sources: ['ogp', 'resource', 'oembed'],
                         icon: {
                             any: 'https://abs.twimg.com/favicons/favicon.ico',
                             smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                         },
+                        avatar: 'https://pbs.twimg.com/profile_images/836605178744832001/iNcUgrE-_400x400.jpg',
                         embed: {
                             type: 'rich',
                             width: 550,
-                            url: 'https://twitter.com/sideway/status/626158822705401856',
-                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
+                            url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A misty but peaceful evening at Loch Ardnahoe tonight. <a href="https://twitter.com/hashtag/Islay?src=hash">#Islay</a> <a href="https://t.co/HXc38uYxa0">pic.twitter.com/HXc38uYxa0</a></p>&mdash; Ardnahoe Distillery (@ardnahoe) <a href="https://twitter.com/ardnahoe/status/892833709438754816">August 2, 2017</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
                         }
                     });
 
@@ -205,38 +205,39 @@ describe('Metaphor', () => {
             it('describes a tweet', (done) => {
 
                 const engine = new Metaphor.Engine({ tweet: true });
-                engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
+                engine.describe('https://twitter.com/ardnahoe/status/892833709438754816', (description) => {
 
                     expect(description).to.equal({
                         type: 'article',
-                        url: 'https://twitter.com/sideway/status/626158822705401856',
-                        title: 'Sideway on Twitter',
+                        url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                        title: 'Ardnahoe Distillery on Twitter',
                         image: {
-                            url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
-                            size: 14664
+                            url: 'https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large',
+                            size: 273453
                         },
-                        description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                        description: '\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d',
                         site_name: 'Twitter',
-                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
                         sources: ['ogp', 'resource', 'oembed'],
                         icon: {
                             any: 'https://abs.twimg.com/favicons/favicon.ico',
                             smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                         },
+                        avatar: 'https://pbs.twimg.com/profile_images/836605178744832001/iNcUgrE-_400x400.jpg',
                         embed: {
                             type: 'rich',
                             width: 550,
-                            url: 'https://twitter.com/sideway/status/626158822705401856',
-                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
+                            url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A misty but peaceful evening at Loch Ardnahoe tonight. <a href="https://twitter.com/hashtag/Islay?src=hash">#Islay</a> <a href="https://t.co/HXc38uYxa0">pic.twitter.com/HXc38uYxa0</a></p>&mdash; Ardnahoe Distillery (@ardnahoe) <a href="https://twitter.com/ardnahoe/status/892833709438754816">August 2, 2017</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
                         },
-                        preview: '<!DOCTYPE html><html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856" target="_blank"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg"/></div></div></div></body></html>',
+                        preview: '<!DOCTYPE html><html><head><title>Ardnahoe Distillery on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/ardnahoe/status/892833709438754816" target="_blank"><div class="metaphor-embed-header-title">Ardnahoe Distillery on Twitter</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large"/></div></div></div></body></html>',
                         tweet: {
-                            name: 'Sideway',
-                            username: 'sideway',
-                            avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
-                            content: 'First steps https://sideway.com',
-                            date: 'July 28, 2015',
-                            links: { 'https://sideway.com': 'https://t.co/XvSn7XSI2G' }
+                            name: 'Ardnahoe Distillery',
+                            username: 'ardnahoe',
+                            content: 'A misty but peaceful evening at Loch Ardnahoe tonight. #Islay pic.twitter.com/HXc38uYxa0',
+                            date: 'August 2, 2017',
+                            links: {},
+                            avatar: 'https://pbs.twimg.com/profile_images/836605178744832001/iNcUgrE-_400x400.jpg',
+                            image: 'https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large'
                         }
                     });
 
@@ -277,7 +278,7 @@ describe('Metaphor', () => {
                         updated_time: description.updated_time,
                         title: '300/365 "The Lonely Gold Rush"',
                         description: '27.07.15  So this is it, day 300. The real count down begins now I guess.  Also found a pickaxe at my house moment before I even shot this. I seem to have strange and worrisome objects at my house. The first one I was looking for was a spear. And I\'m still in need of another deadly prop for this series. A lot has been said with very few words. Don\'t worry I\'m not a murderer. HOnestly I was searching for the spear first as I had a stronger concept, well it has a stronger meaning to it for me, bur alas I couldn\'t find it in time. I have seince then loaceted it after I\'ve shot this. But time was of the essence.   In other news I\'m planning a new photographic series and have been doing some research and sketching. On the downside I don\'t think I\'ll be shooting any of them until this project is over.',
-                        type: 'photo',
+                        type: 'article',
                         url: 'https://www.flickr.com/photos/kent-macdonald/19455364653/',
                         image: {
                             url: 'https://c1.staticflickr.com/1/259/19455364653_201bdfd31b_b.jpg',
@@ -285,7 +286,6 @@ describe('Metaphor', () => {
                             height: 576,
                             size: 278195
                         },
-                        custom_type: 'flickr_photos:photo',
                         sources: ['ogp', 'resource', 'oembed', 'twitter'],
                         icon: {
                             any: 'https://s.yimg.com/pw/favicon.ico',
@@ -518,12 +518,12 @@ describe('Metaphor', () => {
                         ],
                         sources: ['ogp', 'resource', 'oembed', 'twitter'],
                         icon: {
-                            '32': 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
-                            '48': 'https://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png',
-                            '96': 'https://s.ytimg.com/yts/img/favicon_96-vfldSA3ca.png',
-                            '144': 'https://s.ytimg.com/yts/img/favicon_144-vflWmzoXw.png',
+                            '32': 'https://www.youtube.com/yts/img/favicon_32-vfl8NGn4k.png',
+                            '48': 'https://www.youtube.com/yts/img/favicon_48-vfl1s0rGh.png',
+                            '96': 'https://www.youtube.com/yts/img/favicon_96-vfldSA3ca.png',
+                            '144': 'https://www.youtube.com/yts/img/favicon_144-vflWmzoXw.png',
                             any: 'https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico',
-                            smallest: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png'
+                            smallest: 'https://www.youtube.com/yts/img/favicon_32-vfl8NGn4k.png'
                         },
                         thumbnail: {
                             url: 'https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg',
@@ -560,7 +560,7 @@ describe('Metaphor', () => {
                             height: 360
                         },
                         twitter: { site_username: '@youtube' },
-                        preview: '<!DOCTYPE html><html><head><title>Cheese Shop Sketch - Monty Python\'s Flying Circus</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png"/><div class="metaphor-embed-header-site">YouTube</div><a class="metaphor-embed-header-link" href="https://www.youtube.com/watch?v=cWDdd5KKhts" target="_blank"><div class="metaphor-embed-header-title">Cheese Shop Sketch - Monty Python\'s Flying Circus</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg"/></div></div></div></body></html>'
+                        preview: '<!DOCTYPE html><html><head><title>Cheese Shop Sketch - Monty Python\'s Flying Circus</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://www.youtube.com/yts/img/favicon_32-vfl8NGn4k.png"/><div class="metaphor-embed-header-site">YouTube</div><a class="metaphor-embed-header-link" href="https://www.youtube.com/watch?v=cWDdd5KKhts" target="_blank"><div class="metaphor-embed-header-title">Cheese Shop Sketch - Monty Python\'s Flying Circus</div></a></div><div class=\'metaphor-embed-body has-description has-image\'><div class="metaphor-embed-body-description">Subscribe to the Official Monty Python Channel here - http://smarturl.it/SubscribeToPython Cleese plays an erudite customer attempting to purchase some chees...</div><div class="metaphor-embed-body-image-wrapper"><img class="metaphor-embed-body-image" src="https://i.ytimg.com/vi/cWDdd5KKhts/hqdefault.jpg"/></div></div></div></body></html>'
                     });
 
                     done();
@@ -841,30 +841,28 @@ describe('Metaphor', () => {
                 };
 
                 const engine = new Metaphor.Engine({ maxSize: 1024 * 1024 });
-                engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
+                engine.describe('https://twitter.com/ardnahoe/status/892833709438754816', (description) => {
 
                     expect(description).to.equal({
-                        url: 'https://twitter.com/sideway/status/626158822705401856',
                         type: 'article',
-                        title: 'Sideway on Twitter',
-                        image: {
-                            url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg'
-                        },
-                        description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                        url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                        title: 'Ardnahoe Distillery on Twitter',
+                        image: { url: 'https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large' },
+                        description: '\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d',
                         site_name: 'Twitter',
-                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
+                        sources: ['ogp', 'resource', 'oembed'],
                         icon: {
                             any: 'https://abs.twimg.com/favicons/favicon.ico',
                             smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                         },
+                        avatar: 'https://pbs.twimg.com/profile_images/836605178744832001/iNcUgrE-_400x400.jpg',
                         embed: {
-                            url: 'https://twitter.com/sideway/status/626158822705401856',
-                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
+                            type: 'rich',
                             width: 550,
-                            type: 'rich'
+                            url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A misty but peaceful evening at Loch Ardnahoe tonight. <a href="https://twitter.com/hashtag/Islay?src=hash">#Islay</a> <a href="https://t.co/HXc38uYxa0">pic.twitter.com/HXc38uYxa0</a></p>&mdash; Ardnahoe Distillery (@ardnahoe) <a href="https://twitter.com/ardnahoe/status/892833709438754816">August 2, 2017</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
                         },
-                        sources: ['ogp', 'resource', 'oembed'],
-                        preview: '<!DOCTYPE html><html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856" target="_blank"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body has-description no-image\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div><div class="metaphor-embed-body-image-missing"></div></div></div></body></html>'
+                        preview: '<!DOCTYPE html><html><head><title>Ardnahoe Distillery on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/ardnahoe/status/892833709438754816" target="_blank"><div class="metaphor-embed-header-title">Ardnahoe Distillery on Twitter</div></a></div><div class=\'metaphor-embed-body has-description no-image\'><div class="metaphor-embed-body-description">\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d</div><div class="metaphor-embed-body-image-missing"></div></div></div></body></html>'
                     });
 
                     done();
@@ -894,30 +892,28 @@ describe('Metaphor', () => {
                 };
 
                 const engine = new Metaphor.Engine({ maxSize: 1024 * 1024 });
-                engine.describe('https://twitter.com/sideway/status/626158822705401856', (description) => {
+                engine.describe('https://twitter.com/ardnahoe/status/892833709438754816', (description) => {
 
                     expect(description).to.equal({
-                        url: 'https://twitter.com/sideway/status/626158822705401856',
                         type: 'article',
-                        title: 'Sideway on Twitter',
-                        image: {
-                            url: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg'
-                        },
-                        description: '\u201cFirst steps https://t.co/XvSn7XSI2G\u201d',
+                        url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                        title: 'Ardnahoe Distillery on Twitter',
+                        image: { url: 'https://pbs.twimg.com/media/DGP7fj7XUAE5aZE.jpg:large' },
+                        description: '\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d',
                         site_name: 'Twitter',
-                        avatar: 'https://pbs.twimg.com/profile_images/733727309962838016/t8DzeKUZ_400x400.jpg',
+                        sources: ['ogp', 'resource', 'oembed'],
                         icon: {
                             any: 'https://abs.twimg.com/favicons/favicon.ico',
                             smallest: 'https://abs.twimg.com/favicons/favicon.ico'
                         },
+                        avatar: 'https://pbs.twimg.com/profile_images/836605178744832001/iNcUgrE-_400x400.jpg',
                         embed: {
-                            url: 'https://twitter.com/sideway/status/626158822705401856',
-                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First steps <a href="https://t.co/XvSn7XSI2G">https://t.co/XvSn7XSI2G</a></p>&mdash; Sideway (@sideway) <a href="https://twitter.com/sideway/status/626158822705401856">July 28, 2015</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>',
+                            type: 'rich',
                             width: 550,
-                            type: 'rich'
+                            url: 'https://twitter.com/ardnahoe/status/892833709438754816',
+                            html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A misty but peaceful evening at Loch Ardnahoe tonight. <a href="https://twitter.com/hashtag/Islay?src=hash">#Islay</a> <a href="https://t.co/HXc38uYxa0">pic.twitter.com/HXc38uYxa0</a></p>&mdash; Ardnahoe Distillery (@ardnahoe) <a href="https://twitter.com/ardnahoe/status/892833709438754816">August 2, 2017</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
                         },
-                        sources: ['ogp', 'resource', 'oembed'],
-                        preview: '<!DOCTYPE html><html><head><title>Sideway on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/sideway/status/626158822705401856" target="_blank"><div class="metaphor-embed-header-title">Sideway on Twitter</div></a></div><div class=\'metaphor-embed-body has-description no-image\'><div class="metaphor-embed-body-description">\u201cFirst steps https://t.co/XvSn7XSI2G\u201d</div><div class="metaphor-embed-body-image-missing"></div></div></div></body></html>'
+                        preview: '<!DOCTYPE html><html><head><title>Ardnahoe Distillery on Twitter</title></head><body><div class=\'metaphor-embed\'><div class=\'metaphor-embed-header\'><img class="metaphor-embed-header-icon" src="https://abs.twimg.com/favicons/favicon.ico"/><div class="metaphor-embed-header-site">Twitter</div><a class="metaphor-embed-header-link" href="https://twitter.com/ardnahoe/status/892833709438754816" target="_blank"><div class="metaphor-embed-header-title">Ardnahoe Distillery on Twitter</div></a></div><div class=\'metaphor-embed-body has-description no-image\'><div class="metaphor-embed-body-description">\u201cA misty but peaceful evening at Loch Ardnahoe tonight. #Islay\u201d</div><div class="metaphor-embed-body-image-missing"></div></div></div></body></html>'
                     });
 
                     done();
